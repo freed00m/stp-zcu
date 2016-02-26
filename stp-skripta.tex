@@ -1,0 +1,86 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage{cmap, tgtermes}
+\usepackage[utf8]{inputenc}
+\usepackage[czech]{babel}
+\usepackage[IL2]{fontenc}
+\usepackage[pdfpagemode={UseOutlines},bookmarks=true,bookmarksopen=true,
+   bookmarksopenlevel=0,bookmarksnumbered=true,hypertexnames=false,
+   colorlinks=true,linkcolor={black},citecolor={red},urlcolor={blue},
+   pdfstartview={FitV},unicode,breaklinks=true]{hyperref}
+\usepackage{siunitx}
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{tikz, pgfplots, graphicx}
+\usetikzlibrary{shapes,arrows, calc,positioning,shapes.geometric}
+%\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{color}
+\pgfplotsset{grid style={dashed,gray}}
+
+\usepackage[margin = 3cm]{geometry}
+\setlength{\parindent}{0in}
+\usetikzlibrary{automata}
+
+\usepackage{enumitem, float}
+\usepackage{addons}
+
+\DeclareUnicodeCharacter{B0}{\textdegree}
+
+\author{Jan Hranička}
+\title{Stochastické systémy a procesy}
+
+\makeatletter
+\let\Author\@author
+\let\Title\@title
+\def\Subtitle{Učební skripta}
+\makeatother
+
+\renewcommand{\titlepage}{
+	\begin{center}
+	\thispagestyle{empty}
+
+	{\huge\textsc{Poslední build - \today}} \\[3cm]
+	{\large\textsc{Západočeská univerzita v Plzni}}\\[.5em]
+	{\large\textsc{Fakulta aplikovaných věd}}\\[.5em]
+	{\large\textsc{Katedra Kybernetiky}}\\[4cm]
+
+	{\Huge\textsc{\Title}}\\[.5em]
+	\hrule\vspace*{.5em}
+	{\Large\textsc{\Subtitle}}
+	\vfill
+	\the\year
+
+	\end{center}
+	\newpage
+	\setcounter{page}{2}
+}
+
+\begin{document}
+\titlepage
+\tableofcontents
+
+% Nastavení nástroje vytváření diagramů
+	\tikzstyle{block} = [draw, fill=gray!30, rectangle, minimum width = 1.5cm, minimum height = 1cm]
+	\tikzstyle{sum} = [draw, fill=gray!30, circle, node distance = 1cm]
+	\tikzstyle{input} = [coordinate]
+	\tikzstyle{output} = [coordinate]
+	\tikzstyle{pinstyle} = [pin edge={to-,dashed,black}]
+
+\part{Teorie stochastických systémů a procesů}
+\input{kapitoly/chap1.tex}
+\input{kapitoly/chap2.tex}
+\input{kapitoly/chap3.tex}
+\input{kapitoly/chap4.tex}
+\input{kapitoly/chap5.tex}
+\input{kapitoly/chap6.tex}
+\input{kapitoly/chap7.tex}
+\input{kapitoly/uvodSSP.tex}
+\input{kapitoly/teorieSSP.tex}
+\input{kapitoly/fenomLDS.tex}
+\input{kapitoly/spekfaktorizace.tex}
+
+% Cvičení
+\part{Praktické úlohy}
+\input{cviceni/cv1.tex}
+\input{cviceni/cv2.tex}
+\input{cviceni/cv3.tex}
+\input{cviceni/hustota_a_transformace.tex}
+\end{document}

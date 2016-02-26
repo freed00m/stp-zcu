@@ -1,0 +1,411 @@
+\chapter{Náhodné procesy}
+\section{Náhodný proces}
+\subsection{Definice}
+\subsubsection{Hlavní definice}
+Náhodným procesem budeme nazývat soubor $X$ náhodných proměnných $X=\brs{X_t:t\in T}$, kde množinu $T$ zpravidla chápeme jako nekonečnou množinu časových okamžiků. Pokud je množina $T$ konečná, pak se náhodný proces shoduje s náhodným vektorem. Je-li množina $T$ jednobodová, jedná se o náhodnou veličinu.
+
+\subsubsection{Alternativní definice}
+Nechť $(\Omega,\mathscr{F},P)$ je pravděpodobnostní prostor a $(\mathbb{R}^T,\mathscr{T})$ je topologický prostor všech zobrazení množiny $T$ do množiny reálných čísel $\mathbb{R}$ s přirozenou topologií $\mathscr{T}$. Pak zobrazení $X:\Omega\to\mathbb{R}^T$ nazveme náhodným procesem (s parametrem $t\in T$).
+
+\begin{note}{Poznámka}
+Náhodný proces $X$ lze chápat jako funkci proměnných $\omega\in\Omega$ a parametru $t\in T$, jejíž funkční hodnota $X(t,\omega)$ je pro pevné $t$ náhodná veličina a pro pevné $\omega\in\Omega$ je realizací náhodného procesu. 
+\end{note}
+
+\begin{note}{Poznámka}
+Je-li množina $T$ diskrétní, tedy $T=\brs{t_1,t_2,\ldots}$, nazýváme jej procesem s diskrétním časem, nebo též \textbf{náhodnou posloupností}. Pokud $T=\mathbb{R}$, pak náhodný proces nazýváme procesem s časem spojitým.
+\end{note}
+
+Zobecněním náhodného procesu je vektorový náhodný proces, jehož definice se shoduje s definicí náhodného procesu, pouze místo množiny $\mathbb{R}$ se vyskytuje množina n-tic reálných čísel $\mathbb{R}^n$.
+
+\subsubsection{Definice (alternativa)}
+Mějme pravděpodobnostní prostor $(\Omega,\mathscr{F},P)$ a nechť $T\subset\mathbb{R}^1,T\neq\emptyset$ a zobrazení $X:\Omega\times T\to\mathbb{R}^1$ takové, že při každém pevném času $t_0\in T$ je $X(\cdot,t_0)$ náhodná veličina na $(\Omega,\mathscr{F},T)$, nazýváme náhodným procesem. Při pevně zvoleném $\omega_0\in\Omega$ nazýváme funkci $X(\omega_0,\cdot)$ \textbf{realizací náhodného procesu} $X$.
+
+\begin{note}{Příklad}
+Náhodná veličina $X_t$ popisuje počet impulsů registrovaných v telefonní ústředně za časový interval $\langle 0,t\rangle$. Pak $\brs{X_t}_{t\in T}$ je náhodný proces a $T=\langle0,\infty)$.
+\end{note}
+
+\begin{note}{Příklad}
+$\brs{X_t}$ je fluktuační složka napětí na odporu v elektrickém obvodu v čase $t>0$. Fluktuace v důsledku náhodného pohybu elektronů (termický šum).
+\end{note}
+
+\begin{note}{Příklad}
+Uvažujme populaci (lidí, zvířat, apod.), jejíž velikost kolísá náhodně vzhledem k náhodnosti narození, úmrtí a migrace. $\brs{X_t}$ určuje velikost populace v čase $t\in T$.
+\end{note}
+
+\begin{note}{Příklad}
+Měříme teplotu v areálu ZČU a výstup zaznamenáváme termografem. Pak čára, kterou termograf nakreslí, je trajektorií náhodného procesu.
+\end{note}
+
+\section{Distribuční funkce náhodného procesu}
+Analogicky k definici distribuční funkce náhodného vektoru lze očekávat, že distribuci nekonečné náhodné posloupnosti lze definovat vztahem
+
+\[ F(X) = F(x_1,x_2,\ldots)=P(X_{t_1}(\omega)<x_1, X_{t_2}(\omega)<x_2,\ldots) \]
+
+Avšak pravděpodobnost jevu vymezeného nekonečným systémem podmínek $X_{t_i}(\omega)<x_i,i=1,2,\ldots$ by mohla být nulová (prakticky je). To je nepoužitelné pro obecnou definici distribuční funkce náhodného procesu.\br
+
+Ještě horší situace je u procesu spojitého v čase. Musíme se omezit na konečný počet podmínek. Korektním popisem náhodné posloupnosti je soubor všech konečně rozměrných distribučních funkcí.
+
+\[ F(\vecrow[x],\vecrow[t])=P(X_{t_1}(\omega)<x_1,\ldots, X_{t_n}(\omega)<x_n), \]
+
+kde $\brs{\vecrow[t]}$ je \textbf{libovolná} konečná podmnožina $T$.
+
+\section{Hustota pravděpodobnosti náhodného procesu}
+Hustota pravděpodobnosti náhodného procesu $\brs{X_t,t\in T}$ je definována jako derivace distribuční funkce.
+
+\[ p(\vecrow[x],\vecrow[t])=\frac{\partial^n F(\svecrow[x],\svecrow[t])}{\vecrow[\partial x]}, \]
+
+pokud derivace existuje. Přesněji
+
+\[ F(\vecrow[x],\vecrow[t])=\int\limits_{-\infty}^{x_1}\cdots\int\limits_{-\infty}^{x_n}p(\vecrow[\xi],\vecrow[t])\vecrow[\d\xi] \]
+
+\section{Stacionární náhodné procesy}
+Stacionární náhodné procesy jsou takové procesy, jejichž stochastické vlastnosti jsou nezávislé na volbě počátečního okamžiku, resp. počátku časové osy. Pro libovolný časový okamžik $t_0\in T=\mathbb{R}$ musí platit
+
+\[ F(\svecrow[x],\svecrow[t])=F(\svecrow[x],t_1+t_0,t_2+t_0,\ldots,t_n+t_0) \]
+
+Například pokud by platilo $t_0=-t_1$, pak 
+
+\[ F(\svecrow[x],\svecrow[t])=F(\svecrow[x],0,t_2-t_1,\ldots,t_n-t_1) \]
+
+Distribuční funkce tedy nezávisí na $t_1$, ale pouze na rozdílech $t_2-t_1,t_3-t_1,\ldots,t_n-t_1$. Pokud například $n=1$, pak $F(x_1,t_1)$ nezávisí na čase, neboť platí 
+
+\[ F(x_1,t_1)=F(x_1) \]
+
+Podobně též pro $n=2$, kde
+
+\[ F(x_1,x_2,t_1,t_2)=F(x_1,x_2,t_2-t_1) \]
+
+Z toho plyne, že distribuční funkce stacionárního náhodného procesu je funkcí $2n-1$ proměnných. To samé platí i pro hustoty pravděpodobnosti.
+
+\section{Ergodické náhodné procesy}
+Pro zjišťování (měření) stochastických charakteristik náhodných procesů je důležitá vlastnost nazývaná ergodicita. Máme-li například střední hodnotu náhodného procesu, pak bychom podle definice měli změřit velké množství trajektorií a střední hodnotu odhadnout jako aritmetický průměr trajektorií v daném časovém okamžiku.\br
+
+Z intuitivního hlediska se však nabízí možnost pozorovat pouze jednu z realizací a střední hodnotu odhadnout jako střední hodnotu funkce $X_t(\omega)$ danou výrazem
+
+\[ \frac{1}{T}\int\limits_0^t X_t(\omega)\d t \]
+
+Náhodné procesy, u nichž lze všechny charakteristiky zjistit tímto způsobem, se nazývají \textbf{ergodickými}. Ergodicitu často vykazují stacionární procesy, ale mohou vykazovat i procesy nestacionární.
+
+\section{Markovovy (markovské) náhodné procesy}
+Nechť je dán náhodný proces $\brs{X_t,t\in T}$ systémem všech konečně rozměrných hustot pravděpodobnosti.
+
+\[ p(x_n,x_{n-1},\ldots, x_1,t_n,t_{n-1},t_1), \]
+
+kde $t_1<t_2<\ldots<t_n$ je uspořádaná množina časových okamžiků z $T$. Předchozí hustotu pravděpodobnosti lze vyjádřit
+
+\[ p(x_n,\ldots,x_1,t_n,\ldots,t_1) = p(x_n|x_{n-1},\ldots,x_1;t_n,\ldots,t_1)\cdot p(n_{n-1},\ldots,x_1,t_{n-1},\ldots,t_1) \]
+
+Hustotu $p(n_{n-1},\ldots,x_1,t_{n-1},\ldots,t_1)$ lze vyjádřit 
+
+\[ p(x_{n-1},\ldots,x_1,t_{n-1},\ldots,t_1) = p(x_{n-1}|x_{n-2},\ldots,x_1;t_{n-1},\ldots,t_1)\cdot p(n_{n-2},\ldots,x_1,t_{n-2},\ldots,t_1) \]
+
+Jestliže pro každou z podmíněných hustot platí
+
+\[ p(x_k|x_{k-1},\ldots,x_1,t_k,\ldots,t_1)=p(x_k|x_{k-1};t_k,t_{k-1}) \]
+
+pro $k=2,3,\ldots,n$. Pak náhodný proces $\brs{X_t,t\in T}$ nazveme \textbf{Markovovým náhodným procesem}. Hustota pravděpodobnosti pro Markovovův náhodný proces
+
+\[ p(x_n,x_{n-1},\ldots,x_1,t_n,\ldots,t_1)=\prod_{k=1}^np(x_k|x_{k-1};t_k,t_{k-1}), \]
+
+kde $p(x_1|x_0;t_1,t_0)=p(x_1,t_1)$. Rozložení náhodné proměnné $X_{t_k}$ v čase $t_k$ Markovova procesu $\brs{x_t,t\in T}$ při známé hodnotě $X_{t_{k-1}}(\omega)$ nezávisí na průběhu před časovým okamžikem $t_{k-1}$. Tuto vlastnost má proces tvořený vektorem stavu stochastického systému.
+
+\section{Gaussův proces (normální)}
+Náhodný proces $\brs{X_t,t\in T}$ se nazývá Gaussův, jestliže pro každé $t_1<t_2<\ldots<t_n\in T, n=1,2,\ldots$ platí
+
+\[ p(\vecrow[x],\vecrow[t])=\frac{1}{\sqrt{(2\pi)^n |R_x(t)|}} e^{-\frac{1}{2}(x-E[x])^T R_x^{-1}(t)(x-E[x])}, \]
+
+kde $E[x]$ je vektor středních hodnot, $R_x(t)$ je kovarianční matice
+
+\[ R_x(t)=E\brs{[x(t)\cdot E[x(t)]][\cdot]^T} \]
+
+\section{Funkce náhodného procesu}
+\subsection{Autokorelační funkce}
+Autokorelační funkce náhodného procesu $X(t)$ je 
+
+\[ R_{xx}(t_1,t_2)=E[X(t_1)X(t_2)] \]
+
+Obecně se jedná o funkci dvou časových okamžiků.
+
+\subsection{Nekorelovaný proces}
+Náhodný proces se nazývá nekorelovaný, pokud
+
+\[
+R_{xx}(t_1,t_2) = 
+\begin{cases}
+	E[X^2(t_1)], & t_1=t_2\\ 
+	E[X(t_1)]E[X(t_2)],&t_1\neq t_2
+\end{cases}
+\]
+
+\subsection{Autokovarianční funkce}
+Autokovarianční funkce náhodného procesu $X(t)$ je
+
+\[ C_{xx}(t_1,t_2) = E[(X(t_1)-E[X(t_1)])\cdot (X(t_2)-E[X(t_2)])] \]
+
+\begin{note}{Poznámka}
+Platí, že autokovarianční funkce je rovna rozdílu nekorelovaného procesu a středních hodnot náhodných procesů, tj.
+
+\[ C_{xx}(t_1,t_2) = R_{xx}(t_1,t_2) - E[X(t_1)]E[X(t_2)] \]
+\end{note}
+
+Pro nekorelovaný proces platí
+
+\[
+C_{xx}(t_1,t_2) = 
+\begin{cases}
+	C_{xx}(t_1,t_1)=E[(X(t_1)-E[X(t_1)])^2]\\
+	0; t_1\neq t_2
+\end{cases}
+\]
+
+\section{Stacionarita v širším smyslu}
+Náhodný proces je stacionární v širším smyslu, pokud jeho střední hodnota je konstantní a autokovarianční funkce závisí pouze na rozdílu časových okamžiků a ne na jejich konkrétní hodnotě.
+
+\[ E[X(t)] = m_x\forall t\in T \]
+
+\[ C_{xx}(t_1,t_2)=C_{xx}(t_2-t_1),\forall t_1,t_2\in T \]
+
+Často je značeno $C_{xx}(t_2-t_1)=C_{xx}(\tau)$. Pro nekorelvané procesy, které jsou stacionární v širším smyslu, platí
+
+\[ C_{xx}(\tau) = \sigma_x^2\cdot\delta(\tau) \]
+
+Pokud je proces spojitý v čase, $\delta$ představuje Diracův impuls, v diskrétním případě se jedná o Kroneckerovo deltu.
+
+\begin{figure}
+\begin{tikzpicture}[>=stealth', thick]
+\draw[->] (0,0) -- node[below, near end]{$x$}(6,0);
+\draw[->] (2,-1) -- node[left, near end]{$y$}(2,2);
+\draw[->, blue] (2,0) -- node[right]{$\delta$}(2,1.5);
+\end{tikzpicture}
+\caption{Diracův impuls a Kroneckerovo delta}
+\end{figure}
+
+\begin{note}{Poznámka}
+Stacionarita v širším smyslu se často používá v inženýrských aplikacích (závisí pouze na první dvou momentech).
+\end{note}
+
+Pokud je náhodný proces stacionární, pak nám to implikuje, že náhodný proces je stacionární v širším smyslu. Obrácená implikace obecně neplatí (pouze pro některé speciální náhodné procesy
+
+\section{Vlastnosti autokorelační funkce}
+Vlastnosti autokorelační funkce pro náhodné procesy stacionární v širším smyslu platí
+
+\begin{itemize}
+\item Autokorelační funkce je sudá
+\[ R_{xx}(\tau)=R_{xx}(-\tau) \]
+
+\item Pro $\tau=0$ je autokorelační funkce kladná
+\[ R_{xx}(0) = \mean{X^2(t)}>0 \]
+
+\item Autokorelační funkce dosahuje maxima pro $\tau=0$
+
+\[ |R_{xx}(\tau)|\leq R_{xx}(0) \]
+\end{itemize}
+
+\begin{figure}
+\caption{Autokorelační funkce}
+\end{figure}
+
+\section{Proces s nezávislými přírůstky}
+Nechť $X(t),t\in T$ je náhodný proces. Protože v jakémkoliv okamžiku $t$ je $X(t)$ náhodná veličina, je přírůstek (rozdíl) $X(t_2)-X(t_1)$ pro dané $t_1$ a $t_2$ také náhodná veličina. Hustotu pravděpodobnosti přírůstku lze vypočítat z hustot pravděpodobnosti $X(t_1)$ a $X(t_2)$.
+
+\subsection{Proces s nezávislými přírůstky (definice)}
+Náhodný proces $X(t),t\in T$ má nezávislé přírůstky, pokud pro jakékoliv $t_1<t_2<t_3<t_4$.
+
+\[ P_{x(t_2)-x(t_1),x(t_4)-x(t_3)}(x_2-x_1,x_4-x_3)=P_{x(t_2)-x(t_1)}(x_2-x_1)\cdot P_{x(t_4)-x(t_3)}(x_4-x_3) \]
+
+Platí též
+
+\[ P_{x(t_2)-x(t_1),x(t_3)-x(t_2)}(x_2-x_1,x_3-x_2) = P_{x(t_2)-x(t_1)}(x_2-x_1)\cdot P_{x(t_3)-x(t_2)}(x_3-x_2) \]
+
+\textbf{Důležité:} Pokud $X(t),t\in T$ je proces s nezávislými přírůstky, platí, že je zároveň Markovův proces.
+
+\subsection{Kategorie Markových procesů}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{r|cc}
+& spočitatelný počest stavů & spočitatelná realizace\\\hline
+diskrétní v čase & Markovské řetězce & -\\
+spojité v čase & Markovské řetězce spojité v čase (Poissonův proces) & difúzní procesy (Wienerův proces)
+\end{tabular}
+\end{table}
+
+\subsection{Věta Chapman-Kolmogorova}
+Pro Markovův náhodný proces $X(t),t\in T$ platí
+
+\[ P_{x(t_3)|x(t_1)}(x(t_3)|x(t_1))=\int\limits_{-\infty}^\infty P_{x(t_3)|x(t_1)}(x(t_3)|x(t_2))\cdot P_{x(t_2)|x(t_1)}(x(t_2)|x(t_1))\d x(t_2) \]
+
+pro $t_1<t_2<t_3$, $p(x|y, z)p(y|z)=p(x,y|z)$.
+
+\section{Markovské řetězce}
+\begin{itemize}[noitemsep]
+\item Množina $T$ je nejvýše spočetná $T=\brs{0,1,\ldots}$
+\item Množina stavů je nejvýše spočetná $s=\brs{1,2,3,\ldots}$
+\end{itemize}
+
+\subsection{První hustota pravděpodobnosti}
+
+\[ P(X(n)=s)=\Pi_s(n), \]
+
+což představuje pravděpodobnost, že v čase $n$ se řetězec nachází ve stavu $s$. Lze uspořádat do vektoru
+
+\[ \Pi^T(n) = [\Pi_1(n),\Pi_2(n),\ldots,\Pi_s(n),\ldots] \]
+
+Počáteční rozložení pravděpodobnosti je $\Pi^T(0)$. První hustota pravděpodobnosti jednoznačně určuje první distribuční funkci
+
+\[ F(x,n)=\sum_{s\leq x} \Pi_s(n)=P(X(n)\leq x) \]
+
+\subsection{Druhá hustota pravděpodobnosti}
+\begin{eqnarray*}
+P(X(n)=s\wedge X(n+1)=r) & = & P(X(n+1)=r|X(n)=s)\cdot P(X(n)=s) =\\
+& = & P_{sr}(n)\cdot\Pi_s(n)
+\end{eqnarray*}
+
+Výraz $P_{sr}$ je pravděpodobnost, že proces v čase $n$ přešel ze stavu $s$ do stavu $r$.
+
+\begin{eqnarray*}
+\Pi_r(n+1) & = & \sum_{s=1}^\infty P(X(n)=s\wedge X(n+1)=r) =\\
+& = & \sum_{s=1}^\infty P_{sr}(n)\Pi_s(n)
+\end{eqnarray*}
+
+To lze maticově zapsat
+
+\[ \vec{P}(n) =
+\begin{bmatrix}
+P_{11}(n) & P_{12}(n) & \cdots\\
+P_{21}(n) & P_{22}(n) & \cdots\\
+\vdots & \vdots & \ddots
+\end{bmatrix} \]
+
+$\Pi^T(n+1)= \Pi^T(n)\cdot P(n)$. Podobně platí 
+
+\[ \Pi^T(n+2)=\Pi^T\cdot \underbrace{P(n)\cdot P(n+1)}_{\vec{P}^{(2)}(n)}, \]
+
+kde $\vec{P}^{(2)}(n)$ představuje matici přechodu o 2 kroky. Obecně tedy platí
+
+\[ \Pi^T(n+k)=\Pi^T(n)\cdot P(n)P(n+1)\ldots P(n+k-1) \]
+
+Z věty o úplné pravděpodobnosti pro pravděpodobnost přechodu o 2 kroky plyne
+
+\[ P_{ik}^{(2)}(n) = \sum_{s=1}^\infty P_{is}(n)P_{sk}(n+1) \]
+
+(Počet stavů je početný, proto je ve vzorci použita sum a nikoliv integrál). Maticově lze zapsat jako $\vec{P}^{(2)}=P(n)\cdot P(n+1)$. Přechod o 3 kroky je vyjádřen
+
+\[ P_{ik}^{(3)} = \sum_{s=1}^\infty \sum_{r=1}^\infty P_{is}(n)P_{sr}(n+1)P_{rk}(n+2) \]
+
+\[ P^{(3)}(n)=P(n)P(n+1)P(n+2) \]
+
+Obecně pro přechod o $k$ kroků
+
+\[ P^{(k)}(n)=P(n)P(n+1)\cdots P(n+k-1) \]
+
+\subsection{Vlastnosti Markovových řetězců}
+Markovův řetězec může být
+
+\begin{enumerate}[noitemsep]
+\item \textbf{homogenní} -- pokud je matice přechodu $\vec{P}$ konstantní
+\item \textbf{nehomogenní} -- pokud je $P(n)$ funkcí času
+\end{enumerate}
+
+Pro homogenní Markovův řetězec platí $P^{(k)}(n)=p^k$ a tedy
+
+\[ \Pi\t(n+k) = \Pi\t(n)p^k \]
+\[ m(n) = \mean{X(m)}=\sum_{s=1}^\infty s\Pi_s(n) \]
+
+Autokovarianční funkce Markovova řetězce je
+
+\[ C(n,q)=\mean{X(n),X(q)}=m(n)m(q)=\sum_{s=1}^\infty\sum_{k=1}^\infty s\cdot r\cdot P_{sr}^{q-n}(n)\Pi_s(n)-m(n)m(q), \]
+
+kde $P_{sr}^{q-n}(n)$ je pravděpodobnost přechodu ze stavu $s$ v čase $n$ do stavu $r$ v čase $q$. Počáteční podmínky jsou
+
+\[ P_{ss}^{(0)}=1, P_{sr}^{(0)}=0\quad\text{pro } s\neq r \]
+
+\subsection{Stacionární Markovské řetězce}
+\begin{itemize}
+\item $\Pi\t(n)=\Pi\t(n+k)$, tzn. $\Pi\t(n)$ nezávisí na čase $n$, tedy $\Pi\t(n)=\Pi\t$.
+\item $P(X(n)=s \wedge X(n+1)=r)=P(X(n+q)=s \wedge X(n+1+q)=r)=P_{sr}^{(q-n)}(n)\Pi_s=P_{sr}^{(\tau)}\Pi_s$, kde $\tau = q-n$ a značí, o kolik se posuneme nezávisle na čase (předchozí rovnost $P_{sr}^{(q-n)}(n)\Pi_s$ značí, o kolik se posuneme v čase $n$).
+\item $m=\displaystyle\sum_{s=1}^\infty s\cdot\Pi_s=\text{konst.}$, což značí, že střední hodnota je konstanta
+\item $c(\tau)=\sum_{s=1}^\infty\sum_{r=1}^\infty s\cdot r\cdot P_{sr}^{(\tau)}\Pi_s-m^2$, což značí, že autokovarianční funkce záleží na vzdálenosti dvou časových okamžiků 
+\end{itemize}
+
+\subsection{Regulární Markovské řetězce}
+Markovův řetězec s maticí přechodu $\vec{P}$ je regulární, jestliže existuje takové $n$, že $P^n$ nemá nulové prvky. Pro regulární Markovův řetězec platí:
+
+\begin{enumerate}
+\item Vždy existují finální pravděpodobnosti $\Pi\t=[\Pi_1,\Pi_2,\ldots,\Pi_s,\ldots]$, pro něž platí
+
+\[ \Pi_j=\lim_{n\to\infty}P_{ij}^{(n)}, \]
+
+tedy že pravděpodobnosti nezávisí na počátečním stavu
+
+\[ \lim_{n\to\infty}P^n = 
+\begin{bmatrix}
+\Pi_1 & \Pi_2 & \Pi_3 & \cdots \\
+\Pi_1 & \Pi_2 & \Pi_3 & \cdots \\
+\vdots & \vdots & \vdots & \ddots \\
+\end{bmatrix} 
+\]
+
+\item Pro všechny pravděpodobnosti $\Pi_j$ platí $\Pi_j>0$
+
+\item Vektor $\Pi\t$ je jediný, pro který platí
+
+\[ \Pi\t=\Pi\t\cdot P \]
+\end{enumerate}
+
+\subsubsection{Věta}
+U regulárního Markovského řetězce je střední hodnota počtu přechodů přes daný stav neomezená.\br
+
+Důležitá úloha: Střední počet kroků prvního přechodu ze stavu $i$ do stavu $j$ (označíme $m_{ij}$). Předpokládejme, že se během prvního kroku dostaneme ze stavu $i$ do stavu $k$. Mohou nastat dvě situace:
+
+\begin{enumerate}
+\item Pokud $k=j$, pak $m_{ij}=1$.
+\item Pokud $k\neq j$, pak na přechod do stavu $j$ je potřeba s pravděpodobností $P_{ik}$ potřeba $m_{ij}$ kroků, tedy
+
+\[ m_{ij}=\sum_{\substack{k=1\\k\neq j}}^\infty P_{ik}m_{kj}+1,\quad i,j=1,2,\ldots \]
+
+Toto lze zapsat v maticovém tvaru
+\[ \vec{M} = \vec{P}\vec{\widehat{M}} + \vec{E}, \]
+
+kde $\vec{E}$ je matice samých jedniček a $\vec{\widehat{M}}$ je jako matice $\vec{M}$, jen má na diagonále samé nuly.
+\end{enumerate}
+
+\subsubsection{Střední doba návratu do daného stavu}
+Střední dobu návratu do stavu $i$ (označeno jako $m_{ii}$) vypočteme
+
+\begin{eqnarray*}
+\vec{M} & = & \vec{P}\cdot\vec{\widehat{M}}+\vec{E}\\
+\vec{P}^n\vec{M} &=& \vec{P}^{n+1}\vec{\widehat{M}}+\vec{P}^n\cdot\vec{E}\\
+\vec{P}^n\vec{M} &=& \vec{P}^{n+1}\vec{\widehat{M}}+\vec{E}\hspace*{2cm} \text{protože }\vec{P}\cdot\vec{E}=\vec{E}\\
+\lim_{n\to\infty}\vec{\Pi}\vec{M} &=& \vec{\Pi}\vec{\widehat{M}}+\vec{E}\hspace*{2.55cm} \text{protože } \lim_{n\to\infty}\vec{P}^n=\vec{\Pi}\\
+\vec{\Pi}(\vec{M}-\vec{\widehat{M}}) & = & \vec{E}
+\end{eqnarray*}
+
+Pro výraz $\vec{M}-\vec{\widehat{M}}$ platí
+
+\[ \vec{M}-\vec{\widehat{M}} = 
+\begin{cases}
+m_{ij}=0 & \text{pokud } j\neq i\\
+m_{ij}\neq 0 & \text{pokud } i = j
+\end{cases}
+ \]
+ 
+Platí tedy, že $\Pi_i\cdot m_{ii}=1$, tedy $m_{ii}=\frac{1}{\Pi_i}$. Toto tvrzení vyplývá z
+
+\[
+\begin{bmatrix}
+\Pi_1 & \Pi_2 & \Pi_3 & \cdots \\
+\Pi_1 & \Pi_2 & \Pi_3 & \cdots \\
+\vdots & \vdots & \vdots & \ddots
+\end{bmatrix} \cdot
+\begin{bmatrix}
+m_{11} & \emptyset & \cdots \\
+\emptyset & m_{22} & \cdots \\
+\vdots & \vdots & \ddots
+\end{bmatrix} = 
+\begin{bmatrix}
+1 & 1 & 1 & \cdots \\
+1 & 1 & 1 & \cdots \\
+\vdots & \vdots & \vdots & \ddots
+\end{bmatrix}
+\]

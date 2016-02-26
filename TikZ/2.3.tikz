@@ -1,0 +1,26 @@
+\begin{tikzpicture}[trim axis left, trim axis right]
+		\begin{axis}[
+		height=6cm,
+		width = 7.5cm,
+		axis lines=middle,
+		xlabel={$x$},
+		ylabel={$y$},
+		legend style={at={(axis cs:190,1)},anchor=north west},
+		ylabel near ticks
+		%grid = both
+		]
+		\addplot [red, domain=1:180] {
+			-cos(x)
+		};
+		\addplot [blue, dashed, domain=1:180] {
+			abs(-cos(x))
+		};
+		\addplot [magenta, dotted, domain=0:90] {
+			0
+		};
+		\addplot [magenta, dotted, domain=90:180] {
+			-cos(x)
+		};
+		\legend{$f$, $f^+$, $f^-$}
+	\end{axis}
+	\end{tikzpicture}

@@ -1,0 +1,65 @@
+\chapter{Průchod signálu LDS ve fenomenologickém popisu}
+Budeme charakterizovat vlastnosti náhodných signálů po průchodu lineárním dynamickým systémem (LDS) definovaným vnějším popisem. Pro jednoduchost budeme uvažovat jednorozměrný systém (kauzální) popsaný impulsní charakteristikou $g_k$($g_k=0$ pro $k<0$). Vstupem systému bude náhodný proces (posloupnost) $u_k$ s konečnými druhými momenty. Střední hodnotu označíme $\mean{u_k}=m_k^u$ s autokovarianční funkcí
+
+\[ C_{uu}(k,e) = \mean{(u_k-m_k^u)(u_e-m_e^u)} \]
+
+pro výstup platí
+
+\[ y_k = \sum_{e-\infty}^k g_{k-e}u_e=\sum_0^{\infty} g_e u _{k-e} \]
+
+Pro stabilní systém řada konverguje (ve středně-kvadratickém smyslu) a výstup $y_k$ je náhodná posloupnost s konečými druhým momenty
+
+\[ m_k^y = \mean{y_k}=\mean{\sum_{e=0}^\infty g_eu_{k-e} } = \sum_{e=0}^\infty g_em_{k-e}^u \]
+
+Pro výpočet autokovarianční funkce si definujeme odchylky $\widetilde{u}^k=u_k-m_k^u$ a $\widetilde{y}_k=y_k-m_k^u$, pro které platí
+
+\[
+\widetilde{y}_k = y_k-m_k^y = \sum_{e=0}^\infty g_e u_{k-e}-\sum_{e=0}^\infty g_e-m_{k-e}^u=\sum_{e=0}^\infty\widetilde{u}_{k-e}
+\]
+
+Rozdíl mezi signálem a jeho střední hodnotou se filtruje stejně, jako střední hodnota. Autokovarianční funkce výstupu pak bude
+
+\begin{eqnarray*}
+C_{yy}(k,e) &=& \mean{\widetilde{y}_k\, \widetilde{y}_e}=\mean{ \sum_{i=0}^\infty g_i \widetilde{u}_{k-i}\cdot \sum_{j=0}^\infty g_j\widetilde{u}_{e-j} } = \\
+& = & \sum_{i=0}^\infty \sum_{j=0}^\infty g_i g_j\mean{\widetilde{u}_{k-i}\, \widetilde{u}_{k-j}} = \\
+& = & \sum_{i=0}^\infty \sum_{j=0}^\infty g_i g_j C_{uu}(k-i,e-j)
+\end{eqnarray*}
+
+Podobně vzájemná autokovarianční funkce mezi výstupem a vstupem.
+
+\begin{eqnarray*}
+C_{yu}(k,e) &=& \mean{\widetilde{y}_k\, \widetilde{u}_e}=\mean{ \sum_{i=0}^\infty g_i \widetilde{u}_{k-i}\cdot \widetilde{u}_e } = \\
+& = & \sum_{i=0}^\infty g_i\mean{\widetilde{u}_{k-i}\, \widetilde{u}_{e}} = \\
+& = & \sum_{i=0}^\infty g_i C_{uu}(k-i,e)
+\end{eqnarray*}
+
+Je-li vstupní proces gaussovský, je i výstupní proces gaussovský. Zjednodušení výsledků, pokud bude vstupní proces stacionární, tedy
+
+\[ m_k^u = m^u, C_{uu}(k,e)=C_{uu}(k-e) \]
+
+rovnice pro střední hodnotu
+
+\[
+m_k^y = \sum_{i=0}^\infty g_i\mean{u_{k-i}}=\left(\sum_{i=0}^\infty\right)\cdot m^u = K\cdot m^u = m^y,
+\]
+
+kde 
+\[ K=\sum_{i=0}^\infty g_i \]
+
+Autokovarianční funkce výstupu
+
+\[ C_{yy}(k,e) = \sum_{i=0}^\infty \sum_{j=0}^\infty g_i g_j C_{uu}(k-e+j-i)=C_{yy}(k-e) \]
+
+Vzájemná autokovarianční funkce výstupu a vstupu
+
+\[ C_{yu}(k,e) = \sum_{i=0}^\infty g_i C_{uu}(k-e-j)=C_{yu}(k-e) \]
+
+Střední hodnota výstupu je konstantní, obě autokovarianční funkce jsou funkcí rozdílu časových okamžiků. Výstupní proces je tedy stacionární v širším smyslu a výstup a vstup jsou vzájemně stacionární. Lze psát
+
+\[ C_{yu}(k) = \sum_{i=-\infty}^\infty g_i C_{uu}(k-i)= g * C_{uu}, \]
+
+kde $*$ je \textbf{operátor konvoluce}, vzájemná autokovarianční funkce je konvolucí impulsní funkce a autokovarianční funkce vstupu.
+
+\[ C_{yy}(k) = \sum_{i=-\infty}^\infty \sum_{j=-\infty}^\infty g_i C_{uu}(k-i-j)g_j=g * C_{yy} * \bar{g}, \]
+
+kde $\bar{g}_k=g_{-k}$,

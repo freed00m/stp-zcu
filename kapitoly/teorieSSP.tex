@@ -1,0 +1,114 @@
+\chapter{Průchod signálu lineárním stavovým systémem}
+\section{Deterministický stavový model}
+Deterministický stavový model lineárního diskrétního systému
+
+\begin{eqnarray*}
+x_{k+1} & = & Ax_k + Bu_k\\
+y_k & = & Cx_k + Du_k,
+\end{eqnarray*}
+
+kde $x_{k+1}=x(t_{k+1})$ a počátečním stavem $x_0$. Na základě znalosti stavu systému a modelu můžeme přesně určit příští stav systému a jeho výstup. V mnoha případech je tento způsob popisu nedostatečný, určitá složka výstupu nemusí být přesně predikovatelná. Z toho vyplývá, že je nutné popsat signály jako náhodné procesy.
+
+\tab Do systému si tedy zavedeme další dva vstupy a dostaneme \textbf{lineární stochastický systém} (resp. model stochastického diskrétního systému).
+
+\begin{eqnarray*}
+x_{k+1} & = & Ax_k + Bu_k + w_k\\
+y_k & = & Cx_k + Du_k + v_k,
+\end{eqnarray*}
+
+kde $u_k$ je deterministický vstup, $w_k, v_k$ jsou stacionární náhodné posloupnosti, které nazýváme šum systému ($w_k$ -- šum procesu (stavu), $v_k$ -- šum měření). Předpokládáme, že posloupnosti tvoří nezávislé náhodné posloupnosti se stejným rozdělením pravděpodobnosti. Dále předpokládáme, že jsou nezávislé na minulých hodnotách vstupu a stavu.\br
+
+Předpokládejme, že oba dva vstupy mají nulovou střední hodnotu, tj.
+
+\[ \mean{
+\begin{bmatrix}
+w_k \\ v_k
+\end{bmatrix}
+} = 0 \]
+
+a 
+
+\[
+\mathrm{cov}\left\{ \begin{bmatrix}w_k \\ v_k\end{bmatrix},\begin{bmatrix}w_e \\ v_e\end{bmatrix} \right\}
+=\mean{ \begin{bmatrix}w_k \\ v_k\end{bmatrix} \cdot \begin{bmatrix}w_e \\ v_e\end{bmatrix}\t  } =
+\begin{bmatrix}
+Q & S\\ S\t & R
+\end{bmatrix}\cdot\delta(k-e)
+\]
+
+\[ \delta(k-e)=\begin{cases} 1 & \text{pro } k = e\\ 0 & \text{jinak} \end{cases} \]
+
+náhodný proces s těmito vlastnostmi nazýváme \textbf{bílý šum}. Jak se vyvíjí stav a výstup systému? Omezíme se na popis střední hodnoty a vzájemné (auto)kovarianční funkce. Zavedeme značení
+
+\[ m_k^x=\mean{x_k}, m_k^y=\mean{y_k} \]
+
+\begin{eqnarray*}
+\mean{x_{k+1}} & = & \mean{Ax_k+Bu_k+w_k} =\\
+& = & A\mean{x_k}+Bu_k \Rightarrow m_{k+1}^x = Am_k^x + Bu_k\\
+&&\\
+\mean{y_k} & = & \mean{Cx_k+Du_k+v_k} =\\
+& = & C\mean{x_k}+Du_k \Rightarrow m_{k}^y = Cm_k^y + Du_k
+\end{eqnarray*}
+
+Střední hodnota se vyvíjí stejně, jako stav deterministického systému. Označme odchylky od střední hodnoty $\widetilde{x}_k = x_k-m_k^x$, resp. $\widetilde{y}_k=y_k-m_k^y$ a zaveďme
+
+\[ P_k^x=\mathrm{cov}[x_k]=\mean{\widetilde{x}_k\, \widetilde{x}_k\t} \]
+
+Odečtením rovnic získáme stavový popis
+
+\begin{eqnarray*}
+\widetilde{x}_{k+1} & = & A\widetilde{x}_k + w_k\\
+\widetilde{y}_l & = & C\widetilde{x}_k + v_k,
+\end{eqnarray*}
+
+ted $\widetilde{x}_{k+1}\widetilde{x}_{k+1}\t = A\widetilde{x}_{k}\widetilde{x}_{k}\t A\t + A\widetilde{x}_{k}w_k\t + w_k\widetilde{x}_{k}\t A\t+w_kw_k\t$.
+
+\[ \mean{\widetilde{x}_{k+1}\, \widetilde{x}_{k+1}\t} = A\mean{\widetilde{x}_{k}\,\widetilde{x}_{k}\t}A\t=Q \]
+
+To lze zapsat jako
+
+\[ P_{k+1}^x = AP_k^x A\t+Q \]
+
+$\widetilde{x}_{k+1}\widetilde{y}_{k}\t = A\widetilde{x}_{k}\widetilde{x}_{k}\t C\t + A\widetilde{x}_{k}v_k\t + w_k\widetilde{x}_{k}\t C\t+w_k v_k\t$. Střední hodnota je
+
+\[ \mean{\widetilde{x}_{k+1}\, \widetilde{y}_{k}\t} = AP_k^x C\t + S \]
+
+Jako poslední možnost jsou $\widetilde{y}_{k}\widetilde{y}_{k}\t = C\widetilde{x}_{k}\widetilde{x}_{k}\t C\t + C\widetilde{x}_{k}v_k\t + v_k\widetilde{x}_{k}\t C\t+v_k v_k\t$, jehož střední hodnota je 
+
+\[ \mean{\widetilde{y}_{k}\, \widetilde{y}_{k}\t} = CP_k^x C\t + R \]
+
+Rovnice pro sdruženou kovarianční matici stavu a výstupu
+
+\[
+\mathrm{cov}\left\{ \begin{bmatrix}x_{k+1} \\ y_k\end{bmatrix} \right\} =
+\begin{bmatrix}
+AP_k^x A\t+Q & AP_k^x C\t + S\\
+CP_k^x A\t + S\t & CP_k^x C\t + R
+\end{bmatrix}
+\]
+
+Podobně vztahy pro autokovarianční funkci stavu
+
+\[ C_{xx}(k,e) = \mean{\widetilde{x}_k\, \widetilde{x}_e\t}=A^{k-e}P_e^x+Q\delta(k-e), k>e \]
+
+a autokovarianční funkce výstupu
+
+\[ C_{yy}(k,e) = CA^{k-e}P_e^x C\t + R\delta(k-e) + CA^{k-e-1}S(1-\delta(k-e)), k\geq e \]
+
+Jsou-li $w_k$ a $v_k$ gaussovské a $x_0$ také gaussovský, charakterizují první dva momenty stavu a výstupu jejich rozložení, které je také gaussovské. Pokud je počáteční podmínka $x_0$ popsaná prvníma dvěma momenty $m_0^x$ a $P_0^x$, lze $m_k^x$ a $P_k^x$ vyjádřit explicitně.
+
+\[ m_k^x = A^k m_0^x+\sum_{j=0}^{k-1}A^{k-j-1}Bu_j \]
+
+\[ P_k^x = A^k P_0^x (A^k)\t+\sum_{j=0}^{k-1}A^j Q (A^j)\t \]
+
+Je-li $A$ stabilní, pak řada pro kovarianční matici konverguje a lze nalézt ustálené řešení
+
+\[ P^x = \lim_{k\to\infty} P_k^x \]
+
+které vyhovuje Ljapunovové rovnici
+
+\[ P^x = AP^xA\t + Q \]
+
+Ustálená hodnota kovariančního výstupu pak je
+
+\[ P^y = CP^x C\t + R \]

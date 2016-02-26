@@ -1,0 +1,47 @@
+\begin{tikzpicture}[trim axis left, trim axis right]
+		\begin{axis}[
+		height=4cm,
+		width = 7.5cm,
+		%title=Binární relace,
+		axis lines=middle,
+		xlabel={$x$},
+		ylabel={$y$},
+		ymin=0, ymax=4,
+		xmin=0, xmax=6,
+		ytick = {0,1,2,3,4},
+		xtick = {0,1,2,3,4,5},
+		yticklabels = {0,$y_1$,$y_2$,$y_3$,$y_4$},
+		xticklabels = {0,$A_1$,$A_2$,$A_3$,$A_4$,$A_5$}
+		%grid = both
+		]
+		\addplot [no marks] table {
+		0 1
+		1 1
+		1 0
+		1 2
+		2 2
+		2 0
+		2 3
+		3 3
+		3 0
+		3 4
+		4 4
+		4 0
+		4 3
+		5 3
+		5 0
+		};
+		\addplot [dashed, red] table {
+		0 2
+		1 2
+		};
+		\addplot [dashed, red] table {
+		0 3
+		2 3
+		};
+		\addplot [dashed, red] table {
+		0 4
+		3 4
+		};
+	\end{axis}
+	\end{tikzpicture}

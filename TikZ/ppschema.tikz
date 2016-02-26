@@ -1,0 +1,8 @@
+\begin{tikzpicture}
+			\draw (0,0) circle [radius = 1.5cm];
+			\draw[fill=blue!50, opacity = .5] (1.5,0) arc(0:180:1.5) -- cycle;
+			\draw[fill=red!50, opacity=.5] (0,1.5) arc(90:-90:1.5) -- cycle;
+			\node (A) at (-1.25, 1.5) {$A$};
+			\node (AcB) at (1.8, 1.35) {$A\cap B$};
+			\node (B) at (1.25, -1.5) {$B$};
+\end{tikzpicture}

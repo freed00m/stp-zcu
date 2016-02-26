@@ -1,0 +1,28 @@
+\begin{tikzpicture}[trim axis left, trim axis right]
+		\begin{axis}[
+		height=4cm,
+		width = 7.5cm,
+		axis lines=middle,
+		xlabel={$x$},
+		ylabel={$y$},
+		ylabel near ticks
+		%grid = both
+		]
+		\addplot [red, domain=1:10] {
+			-x^2 + 10*x+ 1
+		};
+		\addplot [blue, no marks] table {
+			1 10
+			2 10
+			2 17
+			3 17
+			3 22
+			4 22
+			4 25
+		};
+		\addplot [blue, dashed] table {
+			4 25
+			5 25
+		};
+	\end{axis}
+	\end{tikzpicture}

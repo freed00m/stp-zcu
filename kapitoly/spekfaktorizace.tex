@@ -1,0 +1,247 @@
+\chapter{Spektrální faktorizace diskrétního náhodného procesu}
+Stejně jako u lineárních t-invariantních deterministických systémů lze vztahy mezi vstupy a výstupy popisovat ve frekvenční oblasti. Označíme
+
+\[ G(z) = \sum_{i=0}^\infty g_iz^{-i} \]
+
+Tato rovnice vyjadřuje přenos v Z-transformaci. Definujeme spektrální hustotu procesu jako Z-transformaci autokovarianční (popřípadě vzájemné kovarianční) funkce vyčíslené v jednotkové kružnici.
+
+\[ z=e^{j\omega T_s},\quad \omega\in(-\omega_n,\omega_n), \]
+
+kde $\omega_n$ je tzv. Nyquistova frekvence $\omega_n = \frac{\pi}{T_s}$. Označme
+
+\begin{alignat*}{2}
+S_{uu}(\omega) & = S_{uu}(z)|_{z=e^{j\omega T_s}}, S_{uu}(z) && = \sum_{i=-\infty}^\infty C_{uu}(i)z^{-i}\\
+S_{yy}(\omega) & = S_{yy}(z)|_{z=e^{j\omega T_s}}, S_{yy}(z) && = \sum_{i=-\infty}^\infty C_{yy}(i)z^{-i}\\
+S_{yu}(\omega) & = S_{yu}(z)|_{z=e^{j\omega T_s}}, S_{yu}(z) && = \sum_{i=-\infty}^\infty C_{yu}(i)z^{-i}
+\end{alignat*}
+
+Tato definice spektrální hustoty odpovídá formálně Fourierově transformaci (auto) kovarianční funkce. Platí:
+
+\begin{eqnarray*}
+S_{yu}(z) & = & \sum_{i=-\infty}^\infty C_{yu}(i)z^{-i} = \sum_{i=-\infty}^\infty z^{-i} \sum_{j=0}^\infty C_{uu}(i-j) = \sum_{i=-\infty}^\infty \sum_{j=0}^\infty z^{-i} g_j C_{uu}(i-j) = \\
+& = & \sum_{i=-\infty}^\infty \sum_{j=0}^\infty z^{-j} g_j z^{-(i-j)} C_{uu}(i-j) = \sum_{j=0}^\infty z^{-j}g_j \sum_{i=-\infty}^\infty z^{-(i-j)} C_{uu}(i-j) =
+\end{eqnarray*}
+
+Odtud platí
+
+\[ S_{yu}(z) = G(z)\cdot S_{uu}(z) \]
+
+neboli
+
+\[ S_{yu}(\omega) = G\left(e^{j\omega T_s}\right)\cdot S_{uu}(\omega) \]
+
+Pro opačné pořadí vstupu a výstupu platí
+
+\[ S^{uy}(z) = S_{uu}(z)\cdot G^*(z), \]
+
+kde $G^*(z)=G(z)|_{z=z^{-1}}$, tedy
+
+\[ S_{uy}(\omega) = S_{uu}(\omega)\cdot G^*\left(e^{j\omega T_S}\right)  \]
+
+Pro spektrální hustotu výstupu platí
+
+\[ S_{yy}(z) = \sum_{i=-\infty}^\infty z^{-i}C_{yy}(i) = \cdots = \sum_{j=0}^\infty z^{-j}g_j \sum_{i=-\infty}^\infty z^{-i} C_{uu}(i)\sum_{k=0}^\infty z^{-k}g_k \]
+
+tedy
+
+\begin{eqnarray*}
+S_{yy}(z) & = & G(z)\cdot S_{uu}(z)\cdot G^*(z)\\
+S_{yy}(\omega) & = & \left(G\left(e^{-j\omega T_s}\right)^2\right)\cdot S_{uu}(\omega)
+\end{eqnarray*}
+
+\subsection{Fyzikální interpretace}
+Protože 
+
+\[ \frac{1}{2\omega_n}\int\limits_{-\omega_n}^{\omega_n}S_{uu}(\omega)\d\omega = C_{uu}(0)=\delta_u^2=\mean{u_k^2} \]
+
+Je měřítkem výkonu procesu, lze hodnotu (výkonové) spektrální hustoty v bodě $\omega$ chápat jako hustotu výkonu v okolí frekvence $\omega$. Součin
+
+\[ G\left(e^{j\omega T_s}\right)\cdot G\left(e^{-j\omega T_s}\right) = \left|G\left(e^{j\omega T_s}\right)\right|^2 \]
+
+udává výkonové zesílení na této frekvenci a hodnota $S_{yy}(\omega)$ je pak hustota výkonu výstupního signálu v okolí této frekvence.
+
+\section{Využití vztahů pro vzájemnou autokovarianční funkci a vzájemnou spektrální hustotu pro identifikaci systému}
+
+Uvažujme jako vstupní proces diskrétní bílý šum s autokovarianční funkcí
+
+\[ C_{uu}(k) = \delta(k), \]
+
+kde $\delta$ je Diracův impuls a spektrální hustotou
+
+\[ S_{uu}(z) = \sum_{i=-\infty}^\infty C_{uu}(i)z^{-i} = \sum_{i=-\infty}^\infty \delta(i)z^{-i}=z^0=1 \]
+
+Pro tento vstup získáme 
+
+\begin{eqnarray*}
+C_{yu}(k) & = & \sum_{i=-\infty}^\infty g_iC_{uu}(i-k) = \sum_{i=-\infty}^\infty g_i\delta(k-i)=g_k\\
+S_{yu}(\omega) & = & G\left(e^{-j\omega T_s}\right)\cdot S_{uu}(\omega) = G\left(e^{j\omega T_s}\right)
+\end{eqnarray*}
+
+Vzájemná autokovarianční funkce je tedy rovna impulsní charakteristice systému a vzájemná spektrální hustota je rovna jeho frekvenčnímu přenosu.
+
+\section{Spektrální faktorizace diskrétního náhodného procesu}
+
+Kovarianční matice a spektrální události náhodného procesu závisí pouze na odchylkách uvažovaných signálů. Budeme uvažovat nulový deterministický vstup $u$ a vstupem budou pouze bílé šumy $w$ a $v$. Popis systému:
+
+\begin{eqnarray*}
+x_{k+1} & = & \vec{A}x_k + w_k\\
+y_k & = & \vec{C}x_k + v_k
+\end{eqnarray*}
+
+pokud je $A$ stabilní, po uplynutí dostatečně dlouhé doby od $k=0$ budou stav i výstup stacionární náhodné procesy s nulovou střední hodnotou. K určení jejich kovarianční matice je nutno řešit Ljapunovovu rovnici a rovnici pro výstup.
+
+\begin{eqnarray*}
+P^x & = & \vec{A}P^x\vec{A}\t + \vec{Q}\\
+P^y & = & \vec{C}P^x\vec{C}\t + \vec{R}
+\end{eqnarray*}
+
+Označme
+\[ u_k = 
+\begin{bmatrix}
+w_k\\v_k
+\end{bmatrix}
+\]
+
+Potom přenos mezi tímto vstupem a výstupem $y_k$ je
+
+\[ G(z) = [C(zI-A)^{-1}, I] \]
+
+Spektrální hustota vstupu je 
+
+\[ S_{uu}(z) =
+\begin{bmatrix}
+Q & S\\
+S\t & R
+\end{bmatrix}
+\]
+
+a potom
+
+\[
+S_{yu}(z) = [C(zI-A)^{-1}, I]\cdot
+\begin{bmatrix}
+Q & S\\ S\t & R
+\end{bmatrix}
+\]
+
+\[ S_{uy}(z) = S\t_{yu}(z) \]
+
+\[ S_{yy}(z) = [C(zI-A)^{-1}, I]\cdot 
+\begin{bmatrix}
+Q & S\\ S\t & R
+\end{bmatrix}\cdot [C(zI-A)^{-1}, I]\t
+\]
+
+Pro vzájemně nezávislé šumy $w_k$ a $v_k$ s kovarianční maticí
+
+\[ \mathrm{cov}\left\{ \begin{bmatrix} w_k\\v_e \end{bmatrix}, \begin{bmatrix} w_e\\ v_e \end{bmatrix} \right\} = \mean{\begin{bmatrix} w_k\\v_e \end{bmatrix}\cdot \begin{bmatrix} w_e\\ v_e \end{bmatrix}\t} = \begin{bmatrix}
+Q & 0 \\ 0 & R
+\end{bmatrix}\delta(k-e) \]
+
+Bude platit
+
+\[ S_{yy}(z) = C(zI-A)^{-1}\cdot Q(zI-A)^{-\mathrm{T}}C\t + R \]
+
+\begin{note}{Příklad rozkladu spektrální hustoty}
+Uvažujme spektrální hustotu, která je nezápornou racionální funkcí $\cos(\omega T_s)$
+
+\[ S_{yy}(z) = \frac{(z+0.5)(z^{-1}+0.5)}{(z+0.25)(z^{-1}+0.25)} \]
+
+Pro $S_{uu}(\omega) = 1$ platí
+
+\[ S_{yy}(z) = G(z)\cdot S_{uu}(z)\cdot G^*(z) = C(z)\cdot G^*(z),\quad G^*(z)=G(z)|_{z=z^{-1}} \]
+
+Tuto racionální spektrální hustotu lze vyjádřit čtyřmi způsoby:
+
+\begin{alignat*}{2}
+G_1(z) & = \frac{z+0.5}{z+0.25} && \to \text{stabilní}\\
+G_2(z) & = \frac{1+0.5z}{z+0.25} && \to \text{stabilní}\\
+G_3(z) & = \frac{z+0.5}{1+0.25z} && \to \text{nestabilní}\\
+G_4(z) & = \frac{1+0.5z}{1+0.25z} && \to \text{nestabilní}
+\end{alignat*}
+
+Stochastický signál s danými spektrálními vlastnostmi můžeme získat průchodem bílého šumu dynamickými systémy s přenosy $G_1$ a $G_2$ z nich $G_1$ má minimální fázi. Z toho plyne, že také inverze má stabilní přenos. Takovému rozkladu spektrální hustoty říkáme \textbf{spektrální faktorizace náhodného procesu}.
+\end{note}
+
+\subsection{Věta o spektrální faktorizaci}
+
+Předpokládejme, že $S_{yy}(\omega)$ je racionální funkcí $\cos(\omega T_s)$ případně $e^{j\omega T_s}$, pak existuje právě jedna monická (= 1 u nejvyšších mocnin polynomů v čitateli i jmenovateli) racionální funkce $G(z)$, která má všechny póly uvnitř jednotkové kružnice a všechny nuly uvnitř, nebo na jednotkové kružnici. Platí
+
+\[ S_{yy}(\omega) = G^2\left|G\left(e^{j\omega T_s}\right)\right|^2 \]
+
+Uvažujme náhodný proces vzniklý průchodem bílého šumu s rozptylem $\sigma^2$ dynamickým systémem s přenosem $G(z)$ dle předchozí věty. Jeho spektrální hustota pak bude $S_{yy}(z)$.
+
+\subsection{Věta o realizaci}
+Pro každou racionální spektrální hustotu $S_{yy}\geq 0$ existuje právě jeden dynamický systém s přenosem $G(z)$, který je monickou racionální funkcí, má všechny póly uvnitř jednotkové kružnice a nuly uvnitř, nebo na jednotkové kružnici takový, že stacionární proces s danou spektrální hustotou můžeme získat jako výstup systému je-li vstupem diskrétní bílý šum.
+
+\subsubsection{Důsledek}
+Omezíme-li se na stacionární procesy s racionálními spektrálními hustotami, lze takové procesy získat filtrací diskrétního bílého šumu. Takové náhodné procesy lze reprezentovat ve tvaru:
+
+\[ y_k = \frac{c(d)}{a(d)}e_k, \]
+
+kde $e_k$ je bílý šum s rozptylem $\sigma^2$, $d$ je operátor zpoždění $d\cdot y_k=y_{k-1}$ a $c(d),a(d)$ jsou polynomy:
+
+\begin{eqnarray*}
+a(d) & = & 1 + a_1d + \cdots + a_{n_a}d^{n_a}\\
+c(d) & = & 1 + c_1d + \cdots + a_{n_c}d^{n_c}
+\end{eqnarray*}
+
+nebo v časové oblasti
+
+\[ y_k + a_1y_{k+1}+\cdots+a_{n_a}y_{k-n_a}=e_k+c_1e_{k-1}+\cdots+c_{n_c}e_{k-n_c} \]
+
+Tato reprezentace se nazývá ARMA model (Autoregressive–moving-average model). Podle věty o realizaci lze nalézt polynomy $a(d)$ a $c(d)$ tak, aby byly oba stabilní (kromě kořenů $c(d)$ na jednotkové kružnici). Původní transformaci lze tedy invertovat:
+
+\[ e_k=\frac{a(d)}{c(d)}y_k \]
+
+Posloupnost $\{\ldots, y_{k-1}, y_k \}$ obsahuje veškeré informace o měřené posloupnosti $\{ \ldots, e_{k-1},e_k \}$. Ukážeme si důležitou vlastnost této bílé posloupnosti a zavedeme pojem \textbf{inovace}.
+
+\subsection{Inovační reprezentace}
+Uvažujme
+
+\[ y_{k+1}=\frac{c(d)}{a(d)}e_{k-1} \]
+
+a provedeme dělení polynomů
+
+\[ \frac{c(d)}{a(d)} = 1+\frac{d\bar{c}(d)}{a(d)} \]
+
+tedy
+
+\[ y_{k+1} = \frac{\bar{c}(d)}{a(d)}\cdot e_k+e_{k+1} \]
+
+Dosadíme za $e_k$ a dostaneme
+
+\[ y_{k+1} = \frac{\bar{c}(d)}{a(d)}\cdot\frac{a(d)}{c(d)}y_k+e_{k+1}=\frac{\bar{c}(d)}{c(d)}y_k+e_{k+1} \]
+
+Z toho plyne, že hodnotu $e_{k+1}$ můžeme interpretovat jako tu část informace o $y_{k+1}$, která není obsažena v minulé historii procesu $\{ \ldots,y_{k-1},y_k \}$, a proto ji nazýváme \textbf{inovace procesu}. Protože $e_k$ je bílá posloupnost, je $\widehat{y}_{k+1}=\frac{\bar{c}(d)}{c(d)}y_k$ nejlepší predikcí výstupu na základě zadané historie procesu $\{ \ldots, y_{k-1},y_k \}$ ve smyslu střední kvadratické chyby $\mean{(\ldots, y_{k+1}-\widehat{y}_{k+1})^2}$ a reprezentaci
+
+\[ y_k = \frac{c(d)}{a(d)}e_k = \sum_{r=0}^\infty g_r e_{k-r} \]
+
+nazýváme \textbf{inovační reprezentace}.
+
+\begin{note}{Poznámka}
+pracujeme-li s inovační reprezentací, tj. vstupní posloupnost je bílá, lze model převést do tvaru prediktoru. Jestliže však vstupní posloupnost není bílá, není $\widehat{y}_{k+1}$ dle předchozího vztahu optimální prediktor, neboť $e_{k+1}$ je korelována s předchozími daty, a proto může být chyba predikce dále zmenšena.
+\end{note}
+
+\begin{note}{Příklad - optimální prediktor výstupu}
+Uvažujme spektrální hustotu
+
+\[ S_{yy}(z) = \frac{(z+0.5)(z^{-1}+0.5)}{(z+0.25)(z^{-1}+0.25)} \]
+
+Podle věty o realizaci lze tuto hustotu získat průchodem bílého šumu filtrem.
+
+\[ y_k = \frac{1+0.5d}{1+0.25d}e_k,\quad \left(G(z) = \frac{z+0.5}{z+0.25}\right) \]
+
+protože
+
+\[ \frac{1+0.5d}{1+0.25d} = 1+\frac{0.25d}{1+0.25d} \]
+
+lze proces popsat
+
+\[ y_{k+1} = \frac{0.25d}{1+0.5d}y_k+e_{k+1} \]
+
+a optimální prediktor výstupu $y_{k+1}$ je
+
+\[ \widehat{y}_{k+1} = \frac{0.25d}{1+0.5d}y_k \] 
+
+\end{note}

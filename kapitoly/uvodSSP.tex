@@ -1,0 +1,143 @@
+\chapter{Úvod do teorie stochastických systémů}
+\section{Teorie systémů}
+Smyslem vědy je zkoumání dějů, probíhajících v objektech reálného světa, s cílem najít a využít zákonitosti, jimiž se vývoj řídí. K teorii systémů existují dva přístupy, mechanistický a obecný přístup.
+
+\begin{description}
+\item[Mechanistický přístup --]
+Definice podle Galilea, Newtona a Descarta: Děje lze interpretovat jako soubor určitých elementárních jevů nezávislých na svém okolí (systém je vůči okolí izolovaný). Tento pohled však nebyl schopen řešit řadu významných problémů.
+
+\item[Darwinova teorie --] Darwinova práce poukázala na nezastupitelnou roli náhody a na nutnost zkoumat elementární děje společně s ději, s nimiž \textbf{interagují}.
+
+\item[Obecná teorie --] Nový pohled představovala obecná teorie systémů biologa Ludwig von Bertalanffyho a podobně také Norberta Wienera.
+\end{description}
+
+Teorie systémů vychází z předpokladu, že zákonitosti přírodních dějů lze zkoumat jen v souborech všech vzájemně působících dějů. Zkoumají-li se vybrané děje (klíčové/primární), je nutné zkoumat i další děje, které jsou s primárními v interakci.
+
+\subsection{Atributy a vlastnosti systému}
+Přírodní děje probíhající na hmotných objektech lze charakterizovat jedním či několika \textbf{atributy}. Ty se mění v čase, přičemž děje jsou tvořeny právě průběhy těchto atributů. Souhrn všech hmotných předmětů, na kterých děje probíhají (primární i interagující) nazveme \textbf{reálným systémem}. Množina tvrzení o vlastnostech systému je pak \textbf{teorie daného systému}.
+
+\tab Vlastnosti systému jsou charakterizovány vlastnostmi časových atributů. Pro vytvoření modelu systému potřebujeme model reálného času a model atributů. Pro jednoduchost vyjdeme z předpokladu, že systém pracuje v diskrétních časových okamžicích a atributy nabývají konečného počtu. Modelem reálného času bude množina $T=\brs{\vecrow[t]}$ s úplným uspořádáním $t_i < t_j$ pro $i < j$.
+
+\begin{note}{Příklad}
+Mějme reálný objekt -- vypínač elektrického obvodu. Atributem je stav vypínače (zapnuto - $z$, vypnuto - $v$), modelem bude proměnná $a_1$ a $S_1=\brs{z,v}$. Model je charakterizován několika atributy
+
+\begin{eqnarray*}
+\vec{a} & = & [\vecrow[a]]\\
+S & = & S_1\times S_2 \times \ldots \times S_n
+\end{eqnarray*}
+
+V každém časovém okamžiku nabývá atribut pouze jedné hodnoty. Model průběhu atributů představuje \textbf{trajektorii systému}. Trajektorie je zobrazení z množiny $T$ do množiny $S$, tedy množina trajektorií $\Omega = \brs{s; s:T\to S}$, neboli
+
+\[ \vec{s} = [s(t_0), s(t_1), \ldots, s(t_M)]=[s_0,s_1,\ldots, s_M] \]
+
+Reálné děje jsou charakterizovány souhrny trajektorií, jejichž modelem je podmnožina $A\subset\Omega$ a nazývá se \textbf{jevem systému}. Množina všech jevů tvoří algebru jevů $\mathscr{F}$. Jevy mají pravděpodobnostní vlastnosti -- ke každému jevu $A\subset \Omega$ existuje pravděpodobnost $P(A)$, tedy zobrazení $P:\mathscr{F}\to\mathbb{R}$ vyhovující axiomům pravděpodobnosti.
+\end{note}
+
+\section{Kauzální stochastický systém}
+Stochastický systém lze definovat uspořádanou trojicí
+
+\[ \Sigma = (T,S,P), \]
+
+kde $T$ představuje množinu časových okamžiků, $S$ množinu hodnot atributů a $P$ zobrazení $P:\mathscr{F}\to\mathbb{R}$. Pro teorii stochastických systémů je důležité vedle pravděpodobnostních vlastností trajektorií charakterizovat příčinné vztahy mezi proměnnými systému. Příkladem mohou být následující dvě rovnice
+
+\begin{eqnarray}
+y & = & 3x + w\label{eq:sts1}\\
+x_{k+1} & = & 3x_k + w_k\label{eq:sts2}
+\end{eqnarray}
+
+U první rovnice (\ref{eq:sts1}) není jasné, co nastalo dříve, neboť rovnice nám dává pouze znalost toho, že platí rovnost. U druhé rovnice (\ref{eq:sts2}) je už přidáním indexů zřejmé, která proměnná kdy nastala. Tyto příčinné vztahy se řídí principem kauzality, který říká, že každý jev má svou příčinu. Zobrazení $P$ není nutno vzhledem k axiomatice teorie definovat na celé množině, stačí vymezit vhodné parciální (částečné) zobrazení.
+
+\tab Konkrétní výběr parciálního zobrazení nemá vliv na $P$, ale může reprezentovat další vlastnosti systému. Jím definované pravděpodobnosti budeme nazývat \textbf{kauzálními pravděpodobnostmi}. Ostatní pravděpodobnosti budou pravděpodobnostmi odvozenými. Platí tedy
+
+\[ P(s_0, s_1,\ldots, s_M) = \prod_{k=0}^M P^i(s_{i_k}|s_{i_{k-1}},\ldots, s_{i_0}), \]
+
+kde $i$ je libovolná permutace množiny $[0,1,\ldots, M], i=[i_0,i_1,\ldots, i_M]$.
+
+\begin{note}{Příklad}
+Pro $M=2$ máme pravděpodobnost
+
+\begin{eqnarray*}
+P(s_0,s_1,s_2) & = & P(s_0|s_1,s_2)\cdot P(s_1|s_2)\cdot P(s_2)\\
+& = & P(s_0|s_1,s_2)\cdot P(s_2|s_1)\cdot P(s_1)\\
+& = & P(s_1|s_0,s_2)\cdot P(s_0|s_2)\cdot P(s_2)\\
+& \vdots &
+\end{eqnarray*}
+\end{note}
+
+Pravděpodobnostní vlastnosti systému lze charakterizovat pravděpodobnostmi podmíněnými. Dle principu kauzality následek nemůže předcházet příčině, zvolíme tedy identickou permutaci
+
+\[ i_k=k \]
+
+Stochastický systém je definován podmíněnými pravděpodobnostmi
+
+\begin{equation}
+P(s_k|s_{k-1},\ldots,s_0)\quad \text{pro } k=1,\ldots,M\label{eq:ppSSP}
+\end{equation}
+
+Ty vedle pravděpodobnostních vlastností definují kauzální determinaci řetězce hodnot systémových proměnných. Podmíněné pravděpodobnosti (\ref{eq:ppSSP}) nazveme \textbf{kauzálními pravděpodobnostmi}. Nejprve je dle $P(s_0)$ determinována $s_0$, potom dle $P(s_1|s_0)$ je determinována $s_1,\ldots$ až v čase $k=1,\ldots,M$ je determinována $s_M$ dle
+
+\[ P(s_M|s_{M-1},\ldots,s_0) \]
+
+Kauzální stochastický systém je stochastický systém s vymezenými kauzálními pravděpodobnostmi. Požadavky kladené na atributy vychází z přístupu k teorii systémů.
+
+\begin{enumerate}[label=\alph*)]
+\item \textbf{fenomenologická teorie}\\
+Tato teorie si všímá zjevných (fenomenologických) atributů. Mějme systém
+
+\[ \Sigma = (T,S,P^1), \]
+
+kde $P^1$ je množina zobrazení $P_k, k=0,1,\ldots, M$, které definují kauzální pravděpodobnosti. Systémová proměnná $s_k$ v čase $k$ je obecně determinována celou historií systému vyjádřenou posloupností
+
+\[ s_{k-1},s_{k-2},\ldots,s_0 \]
+
+\item \textbf{stavová teorie}\\
+Atributy systému jsou v každém časovém okamžiku charakterizovány souborem tzv. stavových proměnných, který má všechny vlastnosti proměnných fenomenologické teorie a navíc v souboru stavových proměnných dochází k \textit{působení minulosti na budoucnost pouze prostřednictvím přítomnosti}. Soubor stavových proměnných je zpravidla rozsáhlejší, než soubor proměnných fenomenologických. Mějme systém
+
+\[ \Sigma = (T,S,P^1) \]
+
+Pro kauzální pravděpodobnosti však platí
+
+\[ P(s_k|s_{k-1},s_{k-2},\ldots,s_0) = P(s_k|s_{k-1}), k =0,1,\ldots,M \]
+
+Rozšíření $S$ na nespočetné množiny je triviální a podmíněné pravděpodobnosti se nahradí podmíněnými hustotami pravděpodobnosti. Pro střední hodnotu platí
+
+\[ \mean{\d W\quad \d W\t} = Q\d t, \]
+
+kde $\d W$ lze interpretovat jako $W(t+\d t) - W(t)$
+\end{enumerate}
+
+\subsection{Příklady stochastických systémů}
+\begin{itemize}
+\item \textbf{Systémy s diskrétním časem a spojitými stavy}, pro které je množina časových okamžiků $T = \brs{t_0,t_1,\ldots, t_M}, S=\mathbb{R}^n$, $\mathscr{F}$ je borelovská $\sigma$-algebra na $S\t$ a hustota pravděpodobností $p(s_k|s_{k-1})$ pro $k=1,2,\ldots,M$ vyjadřující závislost pouze do současnosti ($k-1$), na rozdíl od fenomenologické teorie (tam jsou prvky podmíněné hustoty až do prvku $s_0$).
+
+\item \textbf{Stochastické diferenční rovnice} představují alternativní popis místo hustoty $p(s_k|s_{k-1})$ ve tvaru
+
+\[ s_{k+1}=F_k(s_k,\xi_k),\quad k=0,1,\ldots, M-1 \]
+
+s počáteční podmínkou $p(s_0)$ a $\brs{\xi_k, k=0,1,\ldots,M-1}$ posloupností nezávislých náhodných veličin s daným rozdělením pravděpodobnosti (tedy náhodný proces). Hustotu $p(s_k|s_{k-1})$ lze z této stochastické diferenční rovnice určit.
+
+\item \textbf{Stochastické diferenciální rovnice} představuje tzv. Itô-ova stochastická diferenciální rovnice $T=\mathbb{R}^+$ ve tvaru
+
+\[ \d s(t) = F\big(s(t),t\big)\d t + G\big(s(t),t\big)\d W(t), \]
+
+kde $F\big(s(t),t\big)$ je náhodná funkce, $G\big(s(t),t\big)$ představuje obecně maticový koeficient a $W(t)$ je Wienerův proces. Rovnice je zapsána pouze pomocí diferenciálů, neboť derivace Wienerova procesu $\frac{\d}{\d t} W(t)$ neexistuje!
+\end{itemize}
+
+Pro formální derivace náhodného procesu $\brs{w(t), t\geq t_0}$ platí, že má nulovou střední hodnotu a formální kovarianční matici
+
+\[ C_{ww}(t,\tau)=Q\sigma(t-\tau), \]
+
+kde $\sigma$ značí Diracův pulz. Pro $Q$, resp. $G$ nulové přejde stochastický diferenciální rovnice v obyčejnou (deterministickou) rovnici
+
+\begin{eqnarray*}
+\d s(t) & = & F\big(s(t),t\big)\d t\\
+\dot{s}(t) & = & F\big(s(t),t\big)
+\end{eqnarray*}
+
+Řešení takové stochastické rovnice je ve tvaru
+
+\[ 
+s(t) = s(t_0) + \int\limits_{t_0}^t F\big(s(\tau\big)\tau)\d\tau + \int\limits_{t_0}^t G\big(s(\tau,\tau\big)\d W(\tau),
+\]
+
+kde první integrál je Riemannův integrál a druhý Itô-ovův stochastický integrál.

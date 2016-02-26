@@ -1,0 +1,195 @@
+\chapter{Střední hodnota a transformace náhodných veličin}
+
+\section{Střední hodnota}
+Náhodná veličina je plně charakterizována svojí distribuční funkcí nebo hustotou pravděpodobnosti. Mnohdy vystačíme s neúplným popisem náhodné veličiny, kdy na úkor úplnosti můžeme získat jednoduchý tvar stochastické charakteristiky náhodné veličiny. Takovou jednoduchou charakteristikou je \textbf{střední hodnota} náhodné veličiny.
+
+\subsection{Střední hodnota diskrétní náhodné veličiny}
+Mějme náhodnou proměnnou $X$, která na množině $\mathbb{R}$ nabývá konečného, ale nejvýše spočetného, počtu hodnot se nazývá diskrétní náhodná veličina. Budeme opakovat náhodný pokus n-krát a budou nás zajímat průměrné hodnoty, kolem níž se budou výsledky soustřeďovat n-náhodných pokusů v $n_1$ případech bude realizace $X$ rovna $x_1$, $\ldots$, v $n_k$ případech bude realizace $X$ rovna $x_k$, pak aritmetický průměr je
+
+\[ \bar{x}=\frac{1}{n}\sum_{i=1}^k n_ix_i, \]
+
+kde $n_i\approx P(X(\omega)=x_i)\cdot n$. Dosadíme $n_i$ do rovnice a dostáváme
+
+\[ \bar{x}\approx \sum_{i=1}^k P(X(\omega)=x_i)\cdot x_i, \]
+
+označíme $P(x_i)=P(X(\omega)=x_i)$. Střední hodnota náhodné veličiny se značí $\mean{X}$ a je rovna
+
+\[ \mean{X} = \sum_{i=1}^k P(x_i)\cdot x_i \]
+
+\subsection{Střední hodnota spojité náhodné veličiny}
+Náhodná veličina $X$ nabývá na množině $\mathbb{R}$ nespočetného množství hodnot a nazývá se spojitou náhodnou veličinou. Střední hodnota této náhodné veličiny je (analogicky vztah diskrétní střední hodnoty s integrálem místo sumy)
+
+\[ \mean{X} = \int\limits_{-\infty}^\infty xp(x)\d x, \]
+
+kde $p(x)$ je hustota pravděpodobnosti náhodné veličiny $X$.
+
+\subsection{Střední hodnota vektorové náhodné veličiny}
+
+\[ \mean{\vecrow[x]}=\int\limits_{-\infty}^\infty\cdots\int\limits_{-\infty}^\infty(\vecrow[x])p(\vecrow[x])\vecrow[\d x] \]
+nebo
+\[\mean{\vec{x}}=\int\limits_{-\infty}^\infty \vec{x}p(\vec{x})\d\vec{x}  \]
+
+\subsection{Střední hodnota funkce náhodné veličiny}
+Nechť je dán prostor $\brs{\Omega, \mathscr{F}, P}$, náhodnou veličinu $X:\Omega\to\mathbb{R}$, kde $\mathbb{R}$ je množina reálných čísel s přirozenou topologií. Nechť je dána měřitelná funkce $\varphi:\mathbb{R}\to\mathbb{R}$, která každé hodnotě $X(\omega)$ náhodné veličiny $X$ přiřazuje hodnotu $Y(\omega)=\varphi[X(\omega)],Y(\omega)\in\mathbb{R}$. Zobrazení je tedy také náhodná veličina a platí
+
+\[ E[Y] = E[\varphi(X)]=\sum_{i=1}^k \varphi(x_i)p(x_i) \]
+
+pro diskrétní náhodnou veličinu. Pro spojitou náhodnou veličinu platí analogie s integrálem
+
+\[ E[Y] = E[\varphi(X)]=\int\limits_{-\infty}^\infty \varphi(x)p(x_i) \]
+
+\subsection{Momentové charakteristiky náhodných veličin}
+Střední hodnota nepopisuje náhodnou veličinu úplně. Bude-li dán soubor funkcí $\varphi_i$ pro $i=1,2,\ldots$ náhodné veličiny $X$, pak znalost středních hodnot již může být úplným popisem náhodné veličiny $X$. Je-li takovým souborem funkcí 
+
+\[ \varphi_i(X) = X^i, i=1,2,\ldots \]
+
+pak střední hodnoty $E[\varphi_i(X)]=E[X^i]$ jsou obecnými momenty náhodné veličiny $X$. \textbf{Významnou roli} mají momenty prvního a druhého řádu. Momentem prvního řádu je \textbf{střední hodnota}, momentem druhého řádu se bere centrovaný moment a pro spojitou náhodnou veličinu má tvar
+
+\[ E[(X-E[X])(X-E[X])^T] = \int\limits_{-\infty}^\infty (X-E[X])(X-E[X])^T p(x)\d x \]
+
+Jedná se o kovarianční matici náhodného vektoru $\vec{x}$. Její prvek na i-tém řádku a j-tém sloupci je dán
+
+\[ E[(X_i-E[X_i])(X_j-E[X_j])^T]= \int\limits_{-\infty}^{\infty}\int\limits_{-\infty}^{\infty} (X_i-E[X_i])(X_j-E[X_j])^T p(x_i)p(x_j)\d x_i\d x_j\]
+
+a nazýváme jej (vzájemnou) kovariancí náhodných veličin $x_i$ a $x_j$. Pro $i=j$ se tento prvek nazývá variancí, nebo též rozptylem, náhodné veličiny $X_i$. Odmocninou rozptylu je směrodatná odchylka.
+
+\begin{note}{Poznámka}
+První centrální moment je nulový, protože pro $E[(X-E[X])^1]=E[X]-E[X]^1$ (lze vytknout, neboť střední hodnota je lineární operátor).
+\end{note}
+
+\subsection{Podmíněné střední hodnoty}
+Dvě náhodné veličiny $X$ a $Y$ na $\brs{\Omega,\mathscr{F},P}$ a nechť je dána podmíněná pravděpodobnost
+
+\[ P(X(\omega)=x_i | Y(\omega)=y_j)=P(x_i|y_j) \]
+
+pro diskrétní náhodné veličiny a podmíněná hustota pravděpodobnosti $p(x|y)$ pro spojité náhodné veličiny.
+
+\[ E[\varphi(X)|Y(\omega)=y]=\sum_{i=1}^k \varphi(x_i)p(x_i|y) \]
+
+pro diskrétní náhodné veličiny. Pro spojité náhodné veličiny analogicky platí
+
+\[ E[\varphi(X)|Y(\omega)=y]=\int\limits_{-\infty}^\infty \varphi(x)p(x|y)\d x \]
+
+\begin{note}{Poznámka}
+Podmíněná střední hodnota je funkcí náhodné veličiny $Y$ a je tedy sama náhodnou veličinou.
+\end{note}
+
+\subsection{Vlastnosti střední hodnoty}
+\subsubsection{Linearita}
+\[ E[c_1X_1 + c_2X_2] = c_1E[X_1] + c_2E[X_2] \]
+
+v případě, že $c_1$ a $c_2$ jsou konstanty.
+
+\subsubsection{Lineární pravděpodobnost}
+\[ E[X] = E[E[X|Y(\omega)=y]] \]
+
+\subsubsection{Nemultiplikativnost}
+\[ E[X\cdot Y] = E[X]\cdot E[Y], \]
+
+pokud jsou $X$ a $Y$ nezávislé.
+
+\[ E[(X-E[X])(X-E[X])^T] = E[XX^T]-E[X]E[X]^T \]
+
+\section{Transformace náhodných veličin}
+Uvažujme spojitou náhodnou veličinu $X$, spojitou distribuční funkci $F(x)$ a hustotu pravděpodobnosti $p_X(x)$. Dále máme funkci $\varphi$, která zobrazuje náhodnou veličinu $X$ na náhodnou veličinu $Y$, tzn. $Y=\varphi(X)$. Cílem je najít distribuční funkci $F_Y(y)$, případně $p_Y(y)$.\br
+
+\textbf{A)} Předpokládejme, že $\varphi$ je monotónní, rostoucí a diferencovatelná
+
+\begin{figure}
+	\begin{tikzpicture}[trim axis left, trim axis right]
+		\begin{axis}[
+			height=6cm,
+			width = 7.5cm,
+			axis lines=middle,
+			xlabel={$x$},
+			ylabel={$y$},
+			ytick = {},
+			xtick = {}
+			%grid = both
+			]
+			\addplot [red, domain=1:10] {
+				atan(x-5)+90
+			};
+		\end{axis}
+	\end{tikzpicture}
+\end{figure}
+
+Distribuční funkce $F_Y(y)=P(Y<y)$ je pravděpodobnost, že $Y(\omega)<y$, a to nastává tehdy, jestliže $X(\omega)$, kde $x=\varphi^{-1}(y),\varphi^{-1}$ je inverzní funkce k $\varphi$. Platí tedy
+
+\[ F_Y(y)=P(Y<y)=P(X<\varphi^{-1}(y)) \]
+
+nebo-li $F_Y(y)=F_X(\varphi^{-1}(y))$, hustota pravděpodobnosti $p_Y(y)$ je daná
+
+\[ p_Y(y) = \frac{\d F_Y(y)}{\d y}=\frac{\d F_x}{\d x}(\varphi^{-1}(y))\cdot\frac{\d\varphi^{-1}(y)}{\d y}, \]
+
+kde
+
+\[ \frac{\d F_x}{\d x}(\varphi^{-1}(y))=p_X(\varphi^{-1}(y)) \]
+a
+
+\[ P_Y(y)=p_x(\varphi^{-1}(y))\frac{\d\varphi^{-1}(y)}{\d y} \]
+
+\textbf{B)} Funkce $\varphi$ je monotónní, ale klesající.
+
+\begin{figure}
+\begin{figure}
+	\begin{tikzpicture}[trim axis left, trim axis right]
+		\begin{axis}[
+			height=6cm,
+			width = 7.5cm,
+			axis lines=middle,
+			xlabel={$x$},
+			ylabel={$y$},
+			ytick = {},
+			xtick = {}
+			%grid = both
+			]
+			\addplot [red, domain=1:10] {
+				-atan(x-5)+90
+			};
+		\end{axis}
+	\end{tikzpicture}
+\end{figure}
+\end{figure}
+
+\begin{eqnarray*}
+P(X<x)&=&1-P(X\geq x)\\
+\underbrace{P(X<x)+P(X\geq x)}_{P(X\in\mathbb{R})} & = & 1
+\end{eqnarray*}
+
+Protože $F_Y(y)=P(Y<y)=P(X\geq x)=1-P(X<x)$, pro $x$ platí $X=\varphi^{-1}(y)$ a platí $F_Y(y)=1-F_X(\varphi^{-1}(y))$. Pro derivaci platí
+
+\[ p_Y(y) = \frac{\d F_Y(y)}{\d y}= -\frac{\d F_X}{\d x}(\varphi^{-1}(y))\cdot\frac{\d\varphi^{-1}(y)}{\d y} \]
+
+Funkce $\varphi$ je klesající a derivace je kladná. Vztahy pro hustotu pravděpodobnosti můžeme spojit
+
+\[ p_Y(y)=p_X(\varphi^{-1}(y))\left|\frac{\d\varphi^{-1}(y)}{\d y}\right| \]
+
+To platí bez ohledu na to, zda je funkce $\varphi$ klesající nebo rostoucí.
+
+\subsubsection{Alternativní podoba}
+\[ y=\varphi(\varphi^{-1}(y)) \]
+
+Derivací obou stran dle $y$ dostáváme
+\[ 1=\frac{\d\varphi}{\d x}\cdot\frac{\d\varphi^{-1}}{\d y}\Rightarrow\frac{\d\varphi^{-1}}{\d y}=\frac{1}{\frac{\d\varphi}{\d x}} \]
+
+\[ p_Y(y) = \frac{p_X(\varphi^{-1}(y)}{\left|\frac{\d\varphi}{\d x}(\varphi^{-1}(y))\right|} \]
+
+Uvedené vztahy mají smysl, jestliže mají smysl všechny použité operace. K tomu stačí, aby $F_X(x)$ byla všude spojitá a aby (s výjimkou nanejvýše konečného počtu bodů) existovala $p_X(x)$. Dále musí platit, že $\varphi(x)$ je ryze monotónní a všude diferencovatelná.
+
+\subsection{Zobecnění pro vektorový případ}
+Mějme náhodný vektor $\vec{x}=[\vecrow[x]]^T$ a hustotu pravděpodobnosti\\ $p_{\vec{x}}(\vec{x})=p_{\svecrow[x]}(\vecrow[x])$. Je-li $\varphi$ prosté zobrazení z $\mathbb{R}^n$ do $\mathbb{R}^n$, pak náhodný vektor $\vec{Y}=[\vecrow[Y])^T$ daný vztahem $\vec{Y}=\varphi(\vec{X})$ má hustotu pravděpodobnosti
+
+\[ p_{\vec{Y}}(\vec{y}=p_{\vec{x}}(\varphi^{-1}(\vec{y})\cdot\left|\det\frac{\d\varphi^{-1}(\vec{y})}{\d\vec{y}}\right| \]
+
+Po úpravě získáváme
+
+\[ p_{\vec{Y}}(\vec{y})=\frac{p_{\vec{X}}(\varphi^{-1}(y)}{\left|\det\frac{\d\varphi}{\d x}(\varphi^{-1}(y))\right|}, \]
+
+kde $\varphi_1=\varphi_1(\vecrow[x])$ až $\varphi_n=\varphi_n(\vecrow[x])$ jsou prvky Jacobiho matice
+
+\[ \frac{\d\varphi}{\d x}=\begin{bmatrix}
+\frac{\d\varphi_1}{\d x_1} &  \cdots & \frac{\d\varphi_1}{\d x_n}\\
+\vdots & & \vdots\\
+\frac{\d\varphi_n}{\d x_1} & \cdots & \frac{\d\varphi_1}{\d x_n}
+\end{bmatrix} \]

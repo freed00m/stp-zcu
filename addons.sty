@@ -1,0 +1,39 @@
+\usepackage[mathscr]{euscript}
+
+%\definecolor{lightgray}{RGB}{190,190,190}
+
+\newenvironment{note}[1]{
+\vspace*{1em}\hrule\vspace*{1em}	
+	{\color{lightgray} $\blacksquare$} \textbf{#1} \quad
+}{
+\vspace*{.75em}\hrule\vspace*{1em}
+}
+\newcommand{\br}{\\[1em]}
+
+\renewcommand{\d}[0]{\,\mathrm{d}}
+
+% Declare new PGF functions
+\pgfmathdeclarefunction{gauss}{2}{%
+  \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
+\usepackage{xifthen}
+\newcommand{\vecrow}[1][x]{
+	#1_{1},#1_{2},\ldots,#1_{n}
+}
+\newcommand{\svecrow}[1][x]{
+	#1_{1},\ldots,#1_{n}
+}
+
+\newcommand{\sumi}[1][i]{\sum_{#1=1}^\infty}
+\newcommand{\brs}[1]{\left\{#1\right\}}
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
+
+% Center all figures
+\let\oldfigure\figure
+\def\figure{\oldfigure[H]\centering}
+
+\newcommand{\mean}[1]{\ensuremath{\,\mathrm{E}\left[#1\right]}}
+\newcommand{\var}[1]{\ensuremath{\,\mathrm{VAR}\left[#1\right]}}
+
+\renewcommand{\t}[0]{\ensuremath{^{\mathrm{T}}}}
+\newcommand{\tab}{\hspace*{2em}}
