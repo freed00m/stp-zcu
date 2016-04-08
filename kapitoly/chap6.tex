@@ -8,7 +8,7 @@ Náhodným procesem budeme nazývat soubor $X$ náhodných proměnných $X=\brs{
 Nechť $(\Omega,\mathscr{F},P)$ je pravděpodobnostní prostor a $(\mathbb{R}^T,\mathscr{T})$ je topologický prostor všech zobrazení množiny $T$ do množiny reálných čísel $\mathbb{R}$ s přirozenou topologií $\mathscr{T}$. Pak zobrazení $X:\Omega\to\mathbb{R}^T$ nazveme náhodným procesem (s parametrem $t\in T$).
 
 \begin{note}{Poznámka}
-Náhodný proces $X$ lze chápat jako funkci proměnných $\omega\in\Omega$ a parametru $t\in T$, jejíž funkční hodnota $X(t,\omega)$ je pro pevné $t$ náhodná veličina a pro pevné $\omega\in\Omega$ je realizací náhodného procesu. 
+Náhodný proces $X$ lze chápat jako funkci proměnných $\omega\in\Omega$ a parametru $t\in T$, jejíž funkční hodnota $X(t,\omega)$ je pro pevné $t$ náhodná veličina a pro pevné $\omega\in\Omega$ je realizací náhodného procesu.
 \end{note}
 
 \begin{note}{Poznámka}
@@ -63,11 +63,11 @@ Stacionární náhodné procesy jsou takové procesy, jejichž stochastické vla
 
 \[ F(\svecrow[x],\svecrow[t])=F(\svecrow[x],t_1+t_0,t_2+t_0,\ldots,t_n+t_0) \]
 
-Například pokud by platilo $t_0=-t_1$, pak 
+Například pokud by platilo $t_0=-t_1$, pak
 
 \[ F(\svecrow[x],\svecrow[t])=F(\svecrow[x],0,t_2-t_1,\ldots,t_n-t_1) \]
 
-Distribuční funkce tedy nezávisí na $t_1$, ale pouze na rozdílech $t_2-t_1,t_3-t_1,\ldots,t_n-t_1$. Pokud například $n=1$, pak $F(x_1,t_1)$ nezávisí na čase, neboť platí 
+Distribuční funkce tedy nezávisí na $t_1$, ale pouze na rozdílech $t_2-t_1,t_3-t_1,\ldots,t_n-t_1$. Pokud například $n=1$, pak $F(x_1,t_1)$ nezávisí na čase, neboť platí
 
 \[ F(x_1,t_1)=F(x_1) \]
 
@@ -95,7 +95,7 @@ kde $t_1<t_2<\ldots<t_n$ je uspořádaná množina časových okamžiků z $T$. 
 
 \[ p(x_n,\ldots,x_1,t_n,\ldots,t_1) = p(x_n|x_{n-1},\ldots,x_1;t_n,\ldots,t_1)\cdot p(n_{n-1},\ldots,x_1,t_{n-1},\ldots,t_1) \]
 
-Hustotu $p(n_{n-1},\ldots,x_1,t_{n-1},\ldots,t_1)$ lze vyjádřit 
+Hustotu $p(n_{n-1},\ldots,x_1,t_{n-1},\ldots,t_1)$ lze vyjádřit
 
 \[ p(x_{n-1},\ldots,x_1,t_{n-1},\ldots,t_1) = p(x_{n-1}|x_{n-2},\ldots,x_1;t_{n-1},\ldots,t_1)\cdot p(n_{n-2},\ldots,x_1,t_{n-2},\ldots,t_1) \]
 
@@ -120,7 +120,7 @@ kde $E[x]$ je vektor středních hodnot, $R_x(t)$ je kovarianční matice
 
 \section{Funkce náhodného procesu}
 \subsection{Autokorelační funkce}
-Autokorelační funkce náhodného procesu $X(t)$ je 
+Autokorelační funkce náhodného procesu $X(t)$ je
 
 \[ R_{xx}(t_1,t_2)=E[X(t_1)X(t_2)] \]
 
@@ -130,9 +130,9 @@ Obecně se jedná o funkci dvou časových okamžiků.
 Náhodný proces se nazývá nekorelovaný, pokud
 
 \[
-R_{xx}(t_1,t_2) = 
+R_{xx}(t_1,t_2) =
 \begin{cases}
-	E[X^2(t_1)], & t_1=t_2\\ 
+	E[X^2(t_1)], & t_1=t_2\\
 	E[X(t_1)]E[X(t_2)],&t_1\neq t_2
 \end{cases}
 \]
@@ -151,7 +151,7 @@ Platí, že autokovarianční funkce je rovna rozdílu nekorelovaného procesu a
 Pro nekorelovaný proces platí
 
 \[
-C_{xx}(t_1,t_2) = 
+C_{xx}(t_1,t_2) =
 \begin{cases}
 	C_{xx}(t_1,t_1)=E[(X(t_1)-E[X(t_1)])^2]\\
 	0; t_1\neq t_2
@@ -277,7 +277,7 @@ P_{21}(n) & P_{22}(n) & \cdots\\
 \vdots & \vdots & \ddots
 \end{bmatrix} \]
 
-$\Pi^T(n+1)= \Pi^T(n)\cdot P(n)$. Podobně platí 
+$\Pi^T(n+1)= \Pi^T(n)\cdot P(n)$. Podobně platí
 
 \[ \Pi^T(n+2)=\Pi^T\cdot \underbrace{P(n)\cdot P(n+1)}_{\vec{P}^{(2)}(n)}, \]
 
@@ -310,45 +310,57 @@ Markovův řetězec může být
 Pro homogenní Markovův řetězec platí $P^{(k)}(n)=p^k$ a tedy
 
 \[ \Pi\t(n+k) = \Pi\t(n)p^k \]
+
+Střední hodnota Markovského řetězce je definována
 \[ m(n) = \mean{X(m)}=\sum_{s=1}^\infty s\Pi_s(n) \]
 
-Autokovarianční funkce Markovova řetězce je
+Kovarianční funkce Markovova řetězce je
 
 \[ C(n,q)=\mean{X(n),X(q)}=m(n)m(q)=\sum_{s=1}^\infty\sum_{k=1}^\infty s\cdot r\cdot P_{sr}^{q-n}(n)\Pi_s(n)-m(n)m(q), \]
 
 kde $P_{sr}^{q-n}(n)$ je pravděpodobnost přechodu ze stavu $s$ v čase $n$ do stavu $r$ v čase $q$. Počáteční podmínky jsou
 
+Poznámka:
 \[ P_{ss}^{(0)}=1, P_{sr}^{(0)}=0\quad\text{pro } s\neq r \]
 
-\subsection{Stacionární Markovské řetězce}
+\subsection{Stacionární Markovské řetězce (2. řádu)}
+
 \begin{itemize}
 \item $\Pi\t(n)=\Pi\t(n+k)$, tzn. $\Pi\t(n)$ nezávisí na čase $n$, tedy $\Pi\t(n)=\Pi\t$.
 \item $P(X(n)=s \wedge X(n+1)=r)=P(X(n+q)=s \wedge X(n+1+q)=r)=P_{sr}^{(q-n)}(n)\Pi_s=P_{sr}^{(\tau)}\Pi_s$, kde $\tau = q-n$ a značí, o kolik se posuneme nezávisle na čase (předchozí rovnost $P_{sr}^{(q-n)}(n)\Pi_s$ značí, o kolik se posuneme v čase $n$).
-\item $m=\displaystyle\sum_{s=1}^\infty s\cdot\Pi_s=\text{konst.}$, což značí, že střední hodnota je konstanta
-\item $c(\tau)=\sum_{s=1}^\infty\sum_{r=1}^\infty s\cdot r\cdot P_{sr}^{(\tau)}\Pi_s-m^2$, což značí, že autokovarianční funkce záleží na vzdálenosti dvou časových okamžiků 
+\item $m=\displaystyle\sum_{s=1}^\infty s\cdot\Pi_s=\text{konst.}$, což značí, že střední hodnota je konstanta a není fcí času
+\item $c(\tau)=\sum_{s=1}^\infty\sum_{r=1}^\infty s\cdot r\cdot P_{sr}^{(\tau)}\Pi_s-m^2$, což značí, že autokovarianční funkce záleží na vzdálenosti dvou časových okamžiků
 \end{itemize}
 
 \subsection{Regulární Markovské řetězce}
 Markovův řetězec s maticí přechodu $\vec{P}$ je regulární, jestliže existuje takové $n$, že $P^n$ nemá nulové prvky. Pro regulární Markovův řetězec platí:
 
+Tedy po $n$ krocích se mohu dostat do libovolného stavu.
+
 \begin{enumerate}
-\item Vždy existují finální pravděpodobnosti $\Pi\t=[\Pi_1,\Pi_2,\ldots,\Pi_s,\ldots]$, pro něž platí
+\item Vždy existují finální pravděpodobnosti, pravděpodobnost že budu v libovolném stavu v nekonečnu, nezávysle z jakého stavu začnu. $\Pi\t=[\Pi_1,\Pi_2,\ldots,\Pi_s,\ldots]$, pro něž platí
 
 \[ \Pi_j=\lim_{n\to\infty}P_{ij}^{(n)}, \]
 
 tedy že pravděpodobnosti nezávisí na počátečním stavu
 
-\[ \lim_{n\to\infty}P^n = 
+\[ \lim_{n\to\infty}P^n =
+\begin{bmatrix}
+P_{11}^{(n)} & P_{12}^{(n)} & P_{13}^{(n)}  & \cdots \\
+P_{21}^{(n)} & P_{22}^{(n)} & P_{23}^{(n)}  & \cdots \\
+\vdots & \vdots & \vdots & \ddots \\
+\end{bmatrix}
+=
 \begin{bmatrix}
 \Pi_1 & \Pi_2 & \Pi_3 & \cdots \\
 \Pi_1 & \Pi_2 & \Pi_3 & \cdots \\
 \vdots & \vdots & \vdots & \ddots \\
-\end{bmatrix} 
+\end{bmatrix}
 \]
 
 \item Pro všechny pravděpodobnosti $\Pi_j$ platí $\Pi_j>0$
 
-\item Vektor $\Pi\t$ je jediný, pro který platí
+\item Vektor $\Pi\t$ je jediný, pro který platí, musíme mít počáteční podmínku, jinak ta rovnice má nekonečně mnoho řešení.
 
 \[ \Pi\t=\Pi\t\cdot P \]
 \end{enumerate}
@@ -356,7 +368,7 @@ tedy že pravděpodobnosti nezávisí na počátečním stavu
 \subsubsection{Věta}
 U regulárního Markovského řetězce je střední hodnota počtu přechodů přes daný stav neomezená.\br
 
-Důležitá úloha: Střední počet kroků prvního přechodu ze stavu $i$ do stavu $j$ (označíme $m_{ij}$). Předpokládejme, že se během prvního kroku dostaneme ze stavu $i$ do stavu $k$. Mohou nastat dvě situace:
+Důležitá úloha: Střední počet kroků prvního přechodu ze stavu $i$ do stavu $j$ (označíme $m_{ij}$). Předpokládejme, že se během jednoho kroku dostaneme ze stavu $i$ do stavu $k$. Mohou nastat dvě situace:
 
 \begin{enumerate}
 \item Pokud $k=j$, pak $m_{ij}=1$.
@@ -371,25 +383,25 @@ kde $\vec{E}$ je matice samých jedniček a $\vec{\widehat{M}}$ je jako matice $
 \end{enumerate}
 
 \subsubsection{Střední doba návratu do daného stavu}
-Střední dobu návratu do stavu $i$ (označeno jako $m_{ii}$) vypočteme
+Střední dobu návratu do stavu $i$ (označeno jako $m_{ii}$, je to ta diagonála matice $\vec{M}$) vypočteme
 
 \begin{eqnarray*}
 \vec{M} & = & \vec{P}\cdot\vec{\widehat{M}}+\vec{E}\\
 \vec{P}^n\vec{M} &=& \vec{P}^{n+1}\vec{\widehat{M}}+\vec{P}^n\cdot\vec{E}\\
 \vec{P}^n\vec{M} &=& \vec{P}^{n+1}\vec{\widehat{M}}+\vec{E}\hspace*{2cm} \text{protože }\vec{P}\cdot\vec{E}=\vec{E}\\
-\lim_{n\to\infty}\vec{\Pi}\vec{M} &=& \vec{\Pi}\vec{\widehat{M}}+\vec{E}\hspace*{2.55cm} \text{protože } \lim_{n\to\infty}\vec{P}^n=\vec{\Pi}\\
+\vec{\Pi}\vec{M} &=& \vec{\Pi}\vec{\widehat{M}}+\vec{E}\hspace*{2.55cm} \text{protože } \lim_{n\to\infty}\vec{P}^n=\vec{\Pi}\\
 \vec{\Pi}(\vec{M}-\vec{\widehat{M}}) & = & \vec{E}
 \end{eqnarray*}
 
 Pro výraz $\vec{M}-\vec{\widehat{M}}$ platí
 
-\[ \vec{M}-\vec{\widehat{M}} = 
+\[ \vec{M}-\vec{\widehat{M}} =
 \begin{cases}
 m_{ij}=0 & \text{pokud } j\neq i\\
 m_{ij}\neq 0 & \text{pokud } i = j
 \end{cases}
  \]
- 
+
 Platí tedy, že $\Pi_i\cdot m_{ii}=1$, tedy $m_{ii}=\frac{1}{\Pi_i}$. Toto tvrzení vyplývá z
 
 \[
@@ -402,7 +414,7 @@ Platí tedy, že $\Pi_i\cdot m_{ii}=1$, tedy $m_{ii}=\frac{1}{\Pi_i}$. Toto tvrz
 m_{11} & \emptyset & \cdots \\
 \emptyset & m_{22} & \cdots \\
 \vdots & \vdots & \ddots
-\end{bmatrix} = 
+\end{bmatrix} =
 \begin{bmatrix}
 1 & 1 & 1 & \cdots \\
 1 & 1 & 1 & \cdots \\
