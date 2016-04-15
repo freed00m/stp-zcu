@@ -21,7 +21,7 @@ Markovský řetězec je absorpční má-li alespoň jeden absorpční stav a je-
 
 Markovský řetězec skončí v absorpčním stavu s pravděpodobností 1. (Pokud bude absorpčních stavů více, nevíme, ve kterém skončíme, ale bude mít pravděpodobnost 1). Odpovídající matice je
 
-\[ \vec{P} = 
+\[ \vec{P} =
 \begin{bmatrix}
 \frac{1}{4} & \frac{1}{4} & \frac{1}{2}\\
 \frac{1}{2} & \frac{1}{2} & 0\\
@@ -33,65 +33,67 @@ Markovský řetězec skončí v absorpčním stavu s pravděpodobností 1. (Poku
 \begin{enumerate}[label=\arabic*)]
 \item \textbf{pravděpodobnost, že Markovský řetězec skončí v daném absorpčním stavu}\br
 
-	Nechť má Markovský řetězec $n$ stavů, z toho $r$ absorpčních a $s-r$ tranzientních. Matice přechodu $\vec{P}$ je velikosti $s\times s$. Předpokládáme, že Markovský řetězec startuje z tranzientního stavu $a_i$ a ptáme se, s jakou pravděpodobností skončí v určitém absorpčním stavu $a$. Tuto pravděpodobnost označíme $d_i$. Pravděpodobnost, že Markovský řetězec přejde v jednom kroku ze stavu $a_i$ do stavu $a_j$ a potom přejde do stavu $a$, spočteme jako $P_{ij}\cdot d_j$. Úplná pravděpodobnost přechodu z $a_i$ do $a$ je
-	
-	\[ d_i=p_{i1}\cdot d_1+ p_{i2}\cdot d_2 + \ldots + p_{ij}\cdot d_j \]
-	
-	Maticový přepis této rovnice nám říká, že 
-	
+	Nechť má Markovský řetězec $s$ stavů, z toho $r$ absorpčních a tímpádem $s-r$ je tranzientních. Máme k dispozici matici přechodu $\vec{P}$ je velikosti $s\times s$. Předpokládáme, že Markovský řetězec startuje z tranzientního stavu $a_i$ a ptáme se, s jakou pravděpodobností skončí v určitém absorpčním stavu $a$. Tuto pravděpodobnost označíme $d_i$. Pravděpodobnost, že Markovský řetězec přejde v jednom kroku ze stavu $a_i$ do stavu $a_j$ a potom přejde do stavu $a$, spočteme jako $P_{ij}\cdot d_j$ (ppst že MŘ přejde z $a_i$ do $a_j$ a potom do $a$). Úplná pravděpodobnost přechodu z $a_i$ do $a$ je
+
+	\[ d_i=p_{i1}\cdot d_1+ p_{i2}\cdot d_2 + \ldots + p_{ij}\cdot d_s \]
+
+	Maticový přepis této rovnice nám říká, že
+
 	\[ \vec{d} = \vec{P}\vec{d},\quad \vec{d}=[d_1,d_2,\ldots,d_s] \]
-	
-	Tato soustava má více řešení. Vybíráme z nich jediný vektor $d$ tak, aby jeho prvek, odpovídající danému absorpčnímu stavu,  byl jedna a prvky odpovídající ostatním absorpčním stavům byly nulové.
-	
+
+	Tato soustava má více řešení. Vybíráme z nich jediný vektor $d$ tak, aby jeho prvek, odpovídající danému absorpčnímu stavu,  byl jedna a prvky odpovídající ostatním absorpčním stavům byly nulové. Pokud máme víc absorčních stavů, získaneme více vektorů $d$.
+
 	\begin{note}{Příklad}
 		Vektor $\vec{d}\t=[d_1,d_2,d_3,d_4,d_5]$, kde $d_1,d_5$ jsou absorpční stavy, $d_2,d_3,d_4$ jsou tranzientní stavy. Pravděpodobnost, že se dostanu do $d_1$ je
-		\[ \vec{P} = [1,\cdot,\cdot,\cdot,0] \]		
-		
+		\[ \vec{P} = [1,\cdot,\cdot,\cdot,0] \]
+
 	\end{note}
 
 \item \textbf{střední počet přechodů přes daný tranzientní stav}\br
 
-	Nechť $t_{ij}$ označuje středí počet přechodů při startu z tranzientního stavu $a_i$ přes stav $a_j$.
-	
+	Nechť $t_{ij}$ označuje středí počet přechodů při startu z tranzientního stavu $a_i$ přes stav $a_j$ než se dostaneme do absorčního stavu.
+
 	\[ t_{ij}=p_{i1}t_{1j}+p_{i2}t_{2j}+\ldots+p_{i,s-r}t_{s-r,j}+\delta_{ij} \]
-	
+
 	\[ \delta_{ij}=
 	\begin{cases}
 	1 & i=j\\
 	0 & i\neq j; i,j = 1,\ldots, s-r
 	\end{cases}
 	\]
-	
-	(Důvod $\delta_{ij}$ je, že se výchozí stav započítává do počtu přechodů). Maticový zápis
-	
+
+	(Důvod $\delta_{ij}$ je, že se výchozí stav započítává do počtu přechodů, pokud tam náhodou začínáme). Maticový zápis
+
 	\[ \vec{T} = \vec{Q}\cdot\vec{T}+\vec{I} \]
-	
-	Matice $\vec{Q}$ vznikne z $\vec{P}$ vynecháním řádků a sloupců odpovídajícím absorpčním stavům, tj. $\vec{Q}$ je matice velikosti $s-r\times s-r$. Řešení je tedy
-	
+
+	Matice přechodu $\vec{Q}$ vznikne z $\vec{P}$ vynecháním řádků a sloupců odpovídajícím absorpčním stavům, tj. $\vec{Q}$ je matice velikosti $(s-r) \times (s-r))$. Řešení je tedy
+
 	\[ \vec{I}=(\vec{I}-\vec{Q})\cdot\vec{T}\Rightarrow \vec{T}=(\vec{I}-\vec{Q})^{-1} \]
 
 \item \textbf{střední počet přechodů přes všechny tranzientní stavy před skončením ve stavu absorpčním}\br
 
 	Využijeme znalosti z předchozí úlohy. $t_{ij}$ udává střední dobu (pokud se přechody uskutečňují ve stejných časových okamžicích) strávenou ve stavu $a_j$, pokud startujeme ze stavu $a_i$.
-	
+
 	\[ t_i=\sum_{j=1}^{s-r}t_{2j} \]
-	
+
 	Doba (střední počet průchodů) pobytu v tranzientních stavech před pohlcením v absorpčním stavu je
-	
+
 	\[ t = \vec{T}\cdot
 	\begin{bmatrix}
 	1\\1\\1\\1
-	\end{bmatrix}	 
+	\end{bmatrix}
 	\]
 \end{enumerate}
 
 \section{Bernoulliho řada}
 Bernoulliho řada je množina nezávislých náhodných proměnných se stejným rozložením $[X(0),X(1),\ldots]$ a s hodnotami $\brs{0,1}$, kde $P(X(k)=1)=p$ a $P(X(k)=0)=q=1-p$. Tato řada je \textbf{stacionární} a platí
 
-\[ \mean{X(p)}=p,\mean{X^2(p)}=p, \]
-\[ \var{X(p)}=p-p^2=p(1-p)=p\cdot q  \]
+\[ \mean{X(k)}=p,\mean{X^2(k)}=p, \]
+\[ \var{X(k)}=p-p^2=p(1-p)=p\cdot q  \]
 
-Pokud budou hodnoty $\brs{-1,1}$, jedná se o symetrickou Bernoulliho řadu. Velice jednoduchý typ náhodného procesu, jedná se o přiřazení indexu náhodným proměnným, které jsou nezávislé a mají stejná rozdělení. Složitější náhodné procesy lze generovat tak, že na vstup nějakého systému (filtr) aplikujeme jednoduché procesy a na výstupu získáme korelované procesy
+Stejné pro Bernoulliho Náhodnou Veličinu, protože hustota pravděpodobnosti je stejná pro všechny časové okamžiky.
+
+Pokud budou hodnoty $\brs{-1,1}$, jedná se o symetrickou Bernoulliho proces/řadu. Velice jednoduchý typ náhodného procesu, jedná se o přiřazení indexu náhodným proměnným, které jsou nezávislé a mají stejná rozložení. Složitější náhodné procesy lze generovat tak, že na vstup nějakého systému (filtr) aplikujeme tyto jednoduché procesy a na výstupu získáme korelované procesy.
 
 \begin{figure}
 \begin{tikzpicture}[->,>=stealth',thick,node distance = 2cm]
@@ -106,9 +108,9 @@ Pokud budou hodnoty $\brs{-1,1}$, jedná se o symetrickou Bernoulliho řadu. Vel
 \end{figure}
 
 \section{Bernoulliho náhodná procházka}
-Nechť $W(k)$ je symetrie. Bernoulliho řada s hodnotami $\brs{-1,1}$ takový, že
+Nechť $W(k)$ je symetrický Bernoulliho process s hodnotami $\brs{-1,1}$ takový, že
 
-\[ P(W(k)=1)=(W(k)=1)=p=q=\frac{1}{2} \]
+\[ P(W(k)=1) = p = P(W(k)=-1)=q=\frac{1}{2} \]
 
 Náhodná řada
 
@@ -117,23 +119,24 @@ Náhodná řada
 a $X(0)=0$ a $W(0)=0$ je \textbf{Bernoulliho náhodná procházka}.
 
 \begin{figure}
+	\includegraphics[scale=0.3]{obrazky/random_walk.png}
 \caption{Akumulovaný majetek hráče po $k$-té hře, fenomén teplotního šumu}
 \end{figure}
 
-Součet nemá Bernoulliho rozložení /nabývá hodnot v oboru celých čísel). Definiční vztah lze přepsat
+Součet nemá Bernoulliho rozložení a nabývá hodnot v oboru celých čísel \textbf{Z}). Definiční vztah lze přepsat
 
 \[ X(k) =X(k-1)+W(k), \]
 
 což je filtr s nekonečnou impulsní odezvou, s pólem $z=1$. Momenty Bernoulliovy řady $\mean{W(k)}=0,\mean{W^2(k)}=1$, momenty náhodné procházky
 
 \begin{eqnarray*}
-\mean{X(k)} & = & \mean{\sum W(m)} = 0\\
+\mean{X(k)} & = & \mean{\sum W(m)} =  \sum \mean{W(m)} = \sum 0 = 0\\
 \mean{X^2(k)} & = & \mean{\left(\sum_{m=1}^k W(m)\right)\cdot\left(\sum_{n=1}^k W(n)\right)}=\\
-& = & \mean{\sum_m\sum_n W(m)W(n)}=\\
-& = & \sum_{\substack{m,n\\m\neq n}}\underbrace{\mean{W(m)}}_0 \underbrace{\mean{W(n)}}_0+K = K
+& = & \mean{\sum_m^k\sum_n^k W(m)W(n)}=\\
+& = & \sum^{k,k}_{\substack{m,n\\m\neq n}}\underbrace{\mean{W(m)}}_0 \underbrace{\mean{W(n)}}_0+K = K
 \end{eqnarray*}
 
-Platí $\var{X(k)}=K$. Variance roste lineárně, proces není stacionární. Autokorelační funkce je ve tvaru
+Platí $\var{X(k)}= \mean{X^2(k)} - \mean{X(k)}^2 = \mean{X^2(k)} - 0^2 =  K$. Variance roste lineárně, proces není stacionární. Autokorelační funkce je ve tvaru
 
 \begin{eqnarray*}
 R_{xx}(k_1,k_2) &=& \mean{X(k_1)\cdot X(k_2)}=\mean{\left(\sum_{m=1}^{k_1}W(m)\right)\left(\sum_{n=1}^{k_2}W(n)\right)}=\text{momenty}=\\
@@ -185,4 +188,4 @@ R_{xx}(t_1,t_2) &=&\mean{X(t_1)X(t_2)} = \mean{X(t_1)\cdot[X(t_1)+X(t_2)-X(t_1)]
 & = & \mean{X^2(t)}+\underbrace{\mean{X(t_1)}}_0\cdot \underbrace{\mean{X(t_2)-X(t_1)}}_0 = \alpha\varepsilon t_1
 \end{eqnarray*}
 
-Předpokladem je $t_1<t_2$ 
+Předpokladem je $t_1<t_2$
