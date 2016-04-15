@@ -177,6 +177,85 @@ pro $\frac{1}{\alpha}\to 0, \lfloor\alpha t\rfloor=\alpha t$. Vztah upravíme vy
 
 Aby měl proces smysl, musí $\mean{Y^2(t)}>0$ a zároveň $\mean{Y^2(t)}<\infty$. Proto musí $\frac{1}{\alpha}\to 0$ a $\varepsilon^2\to 0$ řádově stejně rychle.
 
+\subsection{Poissonův sčítací proces}
+
+Proces spojitý v čase, diskrétní
+
+definujme časový interval $ \Delta t = \frac{t}{k} \;\;\;\; k \in T = R^k, k \in N$
+
+a uvažujme náhodný proces $X(t) \in X(k \Delta t)$, kde $X(k \cdot 1)$ je bermouliho sčítací řada.
+
+Taková definice procesu umožnuje zobecnění, kdy úspěch může nastav v libovolně dlouhém intervalu, ne pouze pro $ \Delta t = 1$
+
+Uvažujme následující podmínky:
+\begin{itemize}
+	\item $X(k \Delta t)$ je binomická náhodná veličina s pavděpodobností úspěchu $p$ uměrnou délce intervalu $$ p =P (X(\Delta t) = 1) = \lambda \Delta t$$ kde $\lambda$ je parametr rychlosti.
+	\item interval $\Delta t$ je dostatečně malý, aby v libovolném intervalu nastal úspěch pouze jednou. Pravděpodobnost výskytu úspěchu v jednom intervalu je roven $0$.
+\end{itemize}
+
+Potom $X(t)$ je Poissonův sčítací proces.
+
+
+Jaká je ppst že v čase $t$ máme hodnotu $n$
+
+\[ P(X(k \Delta t) = n) = (\lambda \Delta t)^n \cdot (1 - \lambda\Delta t)^{k-n} \]
+
+Nechť $k \rightarrow \infty$, potom $\Delta t \rightarrow 0$ a tedy pravděpodobnost $P = \lambda \Delta t = 0$
+ale střední hodnota musí být konečná.
+
+\[ P \cdot k = \lambda \Delta t k = \lambda \frac{t}{k} k = \lambda t \]
+
+aproximace
+
+\[ P(X(t)=n) \approx \dfrac{(\lambda t)^n}{n!} e^{-\lambda t} \;\;\; n \in Z^+ \]
+
+což je Poissonovo rozdělení s časově proměným parametrem $ \Delta t$
+
+Definice Poissonův sčítací proces $X(t)$ je Náhodná Veličina diskrétní v úrovni, spojitý v čase s $X(0)=0$ takový, že ppst úspěchu v čase $t$ je dán Poissonovým rozdělením s parametrem $ \alpha = \lambda t$
+
+pozn. na rozdíl od binomické sčítací čady může změna nastat v libovolném časovém okamžiku.
+
+% \begin{figure}
+% 	\includegraphics[scale=0.3]{obrazky/poisson_walk.png}
+% \caption{Průběh poissonovi procházky}
+% \end{figure}
+
+Momenty:
+
+\begin{itemize}
+	\item $\mean{X(t)} = \lambda t$
+	\item $\var{X(t)} = \lambda t$
+\end{itemize}
+Jde tedy o nestacionární proces
+
+Příklady
+\begin{itemize}
+	\item přesný model radioaktivního rozpadu
+	\item počet poruch na telefoní lince
+	\item příchod zákazníků do obchodu
+	\item Př. emaily jsou doručovány podle Poissonova procesu s rychlostí $\lambda = 0.2$ zpráv za hodinu. A emaily kontrolujete jednou za hodinu, jaká je ppst že nenajdete novou zprávu v inboxu? \[ P(1) = 0) = \dfrac{(-0.2 \cdot 1 )^0}{0!} e^{-0.2 \cdot 1} = 0.819 \] další \[ P(1) = 0) = \dfrac{(-0.2 \cdot 1 )^1}{1!} e^{-0.2 \cdot 1} = 0.164 \]
+\end{itemize}
+
+Zaměřme se na dobu mezi dvěma událostmi.
+
+Poissonův proces je ISI (Indenpendent stacionary increments), můžeme tedy zkoumat libovolný časový interval
+
+např. čas první události (označíme jí $\vec{Y}$ je to Náhodná veličina), pokud je čas první události větší než $t$, pak na intervalu $<0,t>$ je 0 událostí \[ P(Y>t) = P(X(t) = 0) = e^{-\lambda t} \;\;\;\; t >= 0 \]
+pak \[ F_Y(t) = P(Y <= t ) = 1 - e^{-\lambda t} \]
+
+což je  distribuční funkce s exponenciálním rozdělení \[ \mean{\vec{Y}} = \frac{1}{\lambda}, \;\;\; \var{\vec{Y}} = \frac{1}{\lambda^2} \]
+jaká bude distribuční funkce času, než nastane $n$-tá událost (ozn. $\vec{Y_n}$)
+
+Protože jsou intervali mezi událostmi nezávyslé, lze $\vec{Y_n}$ vyjádřit  součtem intervalů \[ \vec{Y_n} = \sum_{k=1}^n (\vec{Y_k} -\vec{Y_{k-1}}) \]
+
+$\vec{Y_n}$ je tedy součet nezávislých náhodných veličin s exponenciálním rozdělením a má Erlangovo rozdělení \[ P_{\vec{Y_k}} (t) = \dfrac{\lambda^n t^{k-1}}{(n-1)!} e^{-\lambda t} \;\;\;\; t >= 0 \]
+
+Momenty: \[ \mean{Y_n} = \frac{n}{\lambda},  \;\;\;\; \var{Y_n} = \frac{n}{\lambda}  \]
+
+%V simulinku realizovat dirachovy pulsi s intervalem byl exponencialně rozložen, na výstupu integrátoru bude
+
+
+
 \subsection{Definice Wienerova procesu}
 Wienerův proces je náhodný proces spojitý v čase popsaný gaussovskou hustotou pravděpodobnosti, nebo:
 
