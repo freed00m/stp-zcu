@@ -109,14 +109,6 @@ pro $k=2,3,\ldots,n$. Pak náhodný proces $\brs{X_t,t\in T}$ nazveme \textbf{Ma
 
 kde $p(x_1|x_0;t_1,t_0)=p(x_1,t_1)$. Rozložení náhodné proměnné $X_{t_k}$ v čase $t_k$ Markovova procesu $\brs{x_t,t\in T}$ při známé hodnotě $X_{t_{k-1}}(\omega)$ nezávisí na průběhu před časovým okamžikem $t_{k-1}$. Tuto vlastnost má proces tvořený vektorem stavu stochastického systému.
 
-\section{Gaussův proces (normální)}
-Náhodný proces $\brs{X_t,t\in T}$ se nazývá Gaussův, jestliže pro každé $t_1<t_2<\ldots<t_n\in T, n=1,2,\ldots$ platí
-
-\[ p(\vecrow[x],\vecrow[t])=\frac{1}{\sqrt{(2\pi)^n |R_x(t)|}} e^{-\frac{1}{2}(x-E[x])^T R_x^{-1}(t)(x-E[x])}, \]
-
-kde $E[x]$ je vektor středních hodnot, $R_x(t)$ je kovarianční matice
-
-\[ R_x(t)=E\brs{[x(t)\cdot E[x(t)]][\cdot]^T} \]
 
 \section{Funkce náhodného procesu}
 \subsection{Autokorelační funkce}

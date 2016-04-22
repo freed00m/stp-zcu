@@ -139,7 +139,7 @@ což je filtr s nekonečnou impulsní odezvou, s pólem $z=1$. Momenty Bernoulli
 Platí $\var{X(k)}= \mean{X^2(k)} - \mean{X(k)}^2 = \mean{X^2(k)} - 0^2 =  K$. Variance roste lineárně, proces není stacionární. Autokorelační funkce je ve tvaru
 
 \begin{eqnarray*}
-R_{xx}(k_1,k_2) &=& \mean{X(k_1)\cdot X(k_2)}=\mean{\left(\sum_{m=1}^{k_1}W(m)\right)\left(\sum_{n=1}^{k_2}W(n)\right)}=\text{momenty}=\\
+R_{XX}(k_1,k_2) &=& \mean{X(k_1)\cdot X(k_2)}=\mean{\left(\sum_{m=1}^{k_1}W(m)\right)\left(\sum_{n=1}^{k_2}W(n)\right)}=\text{momenty}=\\
 & = & \min(k_1,k_2)
 \end{eqnarray*}
 
@@ -288,7 +288,7 @@ Wienerův proces je náhodný proces spojitý v čase popsaný gaussovskou husto
 která má nulovou střední hodnotu a varianci $\sigma^2_\lambda(t) = \alpha\varepsilon^2 t$. Počáteční podmínka Wienerova procesu je $P(X(t)=0)=1$ \uv{začínáme z nuly}. Je to proces spojitý v čase a v úrovni. Odpovídá výstupu integrátoru. Korelační a autokovarianční funkce jsou stejné z důvodu 0 středních hodnot, tedy
 
 \begin{eqnarray*}
-R_{xx}(t_1,t_2) &=&\mean{X(t_1)X(t_2)} = \mean{X(t_1)\cdot[X(t_1)+X(t_2)-X(t_1)]} = \\
+R_{XX}(t_1,t_2) &=&\mean{X(t_1)X(t_2)} = \mean{X(t_1)\cdot[X(t_1)+X(t_2)-X(t_1)]} = \\
 & = & \mean{X^2(t_1)} + \mean{X(t_1)\cdot(\underbrace{X(t_2)-X(t_1)}_{\text{nezávislý přírůstek}})}= \\
 & = & \mean{X^2(t)}+\underbrace{\mean{X(t_1)}}_0\cdot \underbrace{\mean{X(t_2)-X(t_1)}}_0 = \alpha\varepsilon t_1
 \end{eqnarray*}
@@ -298,3 +298,124 @@ Předpokladem je $t_1<t_2$
 Wienerův proces má stacionární nezávislé přírustky!
 
 Často se označuje $\alpha\varepsilon^2 \triangleq \sigma^2$
+
+
+\subsubsection{Gaussův process (normální)}
+\label{subs:Gaussův process}
+
+Náhodný proces $\brs{X_t,t\in T}$ se nazývá Gaussův, jestliže pro každé $t_1<t_2<\ldots<t_n\in T, n=1,2,\ldots$ platí
+
+\[ p(\vecrow[x],\vecrow[t])=\frac{1}{\sqrt{(2\pi)^n |R_{XX}(t)|}} e^{-\frac{1}{2}(x-E[x])^T R_x^{-1}(t)(x-E[x])}, \]
+
+kde $E[x]$ je vektor středních hodnot, $R_{XX}(t) = \mean{(X-\sigma)(X-\sigma)^T}$ je autokovarianční matice.
+
+\[ R_{XX}(t)=E\brs{[x(t)\cdot E[x(t)]][\cdot]^T} \]
+
+
+\section{Bílý šum}
+\label{sec:Bílý šum}
+
+Při modelování procesů v přírodě nebeo v technických processů se vždy po sestrojení modelu kontroluje zda jeho chování odpovídá realitě. Pokud se zjistí, že je model málo přesný se vylepší (často za cenu vyšší složitosti). Tato procedůra se často opakuje až do bodu, kdy další zesložitění nevylepší kvalitu modelu. To může být způsobeno dvěma faktory
+
+\begin{itemize}
+	\item v procesu zůstaly nepredikovatelné výkyvy (změny), pro které neexistují kauzální vztahy
+	\item bylo dosaženo úrovně náhodných chyb v přístrojích použitých k měření.. na této úrovni lze opakovanými experimenty zjistit statistiky šumu
+\end{itemize}
+
+V mnoha případech je užitečným modelem šumu \uv{bilý šum}.
+
+\subsubsection{Bílá náhodná řada}
+\label{subs:Bílá náhodná řada}
+
+\[ { X(n), n=1,2,...,\infty} \] je markovská řada, pro kterou platí, tzn. \[ P(X(k)|X(l)) = P(X(t)) \;\;\; k > l \] že $X(k)$ jsou vzájemně nezávyslé. Důsledkem je, že znalost $X(k)$ nám nepomůže pro predikování $X(l)$.
+
+Pokud má $X(t)$ Gaussovksé rozložení, pak řada ${X(k)}$ je bílá Gaussovksá náhodná řada.
+
+K její specifikaci pak stačí střední hodnota $\mean{X(t)} k \geq 1$ a kovarianční maticí $\mean{X(t) - \mean{X(t)}  (X(l) - \mean(X(l)) )} = C_{XX} (k,l)$
+
+\[ C_{XX} (k,l) = Q_ \delta (k-l) \] kde $\delta(m)$ je kroneckrova $\delta$
+
+\[ \delta(m) = \begin{cases} 1, & m = 0 \\ 0, & jinak \end{cases} \]
+
+spojitá analogie bíle Gaussovské řady by se mohla hodit pro spojité systémy.
+
+Uvažujmě stacionární G. proces s nulovou střední hodnotou a autokovarianční funkcí.
+
+\[ R_{XX}^\rho (t + \tau, t) = R_{XX}^\rho (\tau) = \sigma^2 \dfrac{\rho}{2} e^{-\rho |\tau|} \]
+
+pro velké $\rho$ má tento proces vlastnosti, jaké bychom pro bílý G. proces chtěli.
+
+pozn. pokud $\rho$ bude celé číslo, ptoom řada.
+
+\[ { \dfrac{R_{XX}^\rho(\tau)}{\sigma^2} , \rho_1 <\rho_2 <\rho_3 } \]
+
+definuje Diracovo $\delta$
+
+tedy \[ R_{XX}^\infty (\tau) = \sigma^2 \delta (\tau) \]
+
+Formálně lze spojitý bílý G. proces $\{ X(t), t \;\; \in \tau \}$ definuje G. proces
+
+\[ C_{XX}^\rho (t,\tau) = Q(t) \delta(t-\tau) \]
+
+kde $Q(t)$ je pozitivně definitní kovarianční matice
+
+Protože není Diracova funkce klasickou funkcí, je spojitý bílý G. proces \textbf{matematickou funkcí}.
+
+bližší pohled
+
+Jeho spektrální, hustotou je Fourierova transformace autokorelační funkce.
+
+\[ S_{XX}^\rho (\omega) = \int_{-\infty}^{\infty} R_{XX}^\rho (\tau) e^{-j \omega \tau} d \tau  = \int_{-\infty}^{\infty} \sigma^2 \dfrac{\rho}{2} e^{-\rho |\tau|} e^{-j \omega \tau} d \tau = \dfrac{\sigma^2}{1+(\frac{\omega}{\rho})^2} \]
+
+
+Pro $\rho \to \infty$
+
+\[ S_{XX}^\rho (\omega) \to \sigma^2 \]
+
+Vidíte že všechny frekvence jsou zastoupené stejně. Proto \uv{bílý}, páč barva o všech frekvencích stejně zastoupená je bílá.
+
+
+Konstantní spektrální hustota vyžaduje nekonečnou energii.
+
+$\rightarrow$ spojitý bílý šum není fyzikálně realizovatelný.
+
+Bilý G. šum jako derivace W. procesu, ačkoliv W. proces není diferencovatelný v žádném slova smyslu.
+
+bílý šum získáme jako $X(t) = Y'(t)$ kde $Y(t)$ je W. proces
+
+autokorelační funkce W. process
+
+\[ R_{YY} (t_1,t_2) = \sigma^2 (t_1,t_2) \min (t_2,t_1) = \dfrac{\partial^2}{\partial t_1 \partial t_2} R_{YY} (t_1, t_2) \]
+
+pak
+
+\[ \min (t_2,t_1) = t_1 pro t_1 < t_2 a t_2 pro t_1 > t_2  = \dfrac{\partial}{\partial t_1} \min (t_2,t_1) = \begin{cases} t_1 , & t_1 < t_2 \\ t_2, & t_1 > t_2 \end{cases} \]
+
+což je jednotkový skok $1[t_2-t_1]$
+
+\[ \to R_{XX} (t_1,t_2) = \sigma^2 \delta(t_2-t_1) \]
+
+ačkoliv není bílý šum fyzikálně realizovatelný, v praxi se často objevu poces se spektrální hustotou konstantní pouze v určitém pásmu \uv{(už to není bílý šum)}
+
+
+\[ S_{XX} (\omega) = \begin{cases}N, & |\omega| < B \\ 0, & jinak \end{cases} \]
+
+\begin{center}
+	\includegraphics[scale=0.2]{obrazky/autocorelation.jpg}
+\end{center}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
