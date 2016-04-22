@@ -120,7 +120,7 @@ a $X(0)=0$ a $W(0)=0$ je \textbf{Bernoulliho náhodná procházka}.
 
 \begin{figure}
 	\includegraphics[scale=0.3]{obrazky/random_walk.png}
-\caption{Akumulovaný majetek hráče po $k$-té hře, fenomén teplotního šumu}
+	\caption{Akumulovaný majetek hráče po $k$-té hře, fenomén teplotního šumu}
 \end{figure}
 
 Součet nemá Bernoulliho rozložení a nabývá hodnot v oboru celých čísel \textbf{Z}). Definiční vztah lze přepsat
@@ -145,37 +145,7 @@ R_{xx}(k_1,k_2) &=& \mean{X(k_1)\cdot X(k_2)}=\mean{\left(\sum_{m=1}^{k_1}W(m)\r
 
 Pokud to $W(k)$ je Bernoulliho řada bez symetrických hodnot s $ \brs{0,1} $ pak neříkáme Bernoulliho procházka, ale binomická sčítací řada.
 
-\section{Wienerův proces}
-Wienerův proces je model fyzikálního jevu známého jako Braunův pohyb, kde se částice chaoticky pohybuje v kapalině díky náhodným srážkám s molekulami kapaliny. Wienerův proces lze odvodit z Bernoulliho řady, která nabývá hodnot $\brs{-\varepsilon,\varepsilon}$ pro malé $\varepsilon>0$. Předpokládejme, že se kolize odehrávají s rychlostí $\alpha$, tzn. odehrávají se v násobcích $\frac{1}{\alpha}$. Celkový počet kolizí za čas $t$ je $n=\lfloor\alpha\cdot t\rfloor$ (zaokrouhlování dolů na celá čísla).
 
-\subsubsection*{Definujeme náhodný proces}
-\[ X(t)=\sum_{m=1}^{\lfloor\alpha\cdot t\rfloor} W(m), \]
-
-který je podobný Bernoulliho náhodné procházce, ale
-
-\begin{enumerate}[label=\roman*)]
-\item intervaly mezi událostmi jsou $\frac{1}{\alpha}$ namísto 1.
-\item amplitudy jsou $\brs{-\varepsilon,\varepsilon}$ namísto $\brs{-1,1}$
-\item horní mez je $\lfloor\alpha\cdot t\rfloor$ namísto $k$
-\end{enumerate}
-
-Wienerův proces se získá limitním přechodem $\varphi\to 0$ (spojitý náhodný proces) a $\frac{1}{\alpha}\to 0$ (proces spojitý v čase).
-
-\[ Y(t) = \lim_{\substack{\varepsilon\to 0\\ \frac{1}{\alpha}\to 0}} X(t) \]
-
-Jak budou vypadat momenty po limitním přechodu:
-
-\[ \mean{Y(t)} = \lim_{\substack{\varepsilon\to 0\\ \frac{1}{\alpha}\to 0}} \mean{X(t)}=0 \]
-
-Z toho plyne, že Wienerův proces má trvale nulovou střední hodnotu. V případě variace
-
-\[ \mean{Y^2(t)} = \lim_{\substack{\varepsilon\to 0\\ \frac{1}{\alpha}\to 0}} \mean{X^2(t)}=\lim_{\substack{\varepsilon\to 0\\ \frac{1}{\alpha}\to 0}} \lfloor\alpha t\rfloor \varepsilon^2 \]
-
-pro $\frac{1}{\alpha}\to 0, \lfloor\alpha t\rfloor=\alpha t$. Vztah upravíme vytknutím $t$ a tedy
-
-\[ \mean{Y^2(t)} = t \lim_{\substack{\varepsilon\to 0\\ \frac{1}{\alpha}\to 0}} \frac{\varepsilon^2}{\frac{1}{\alpha}} \]
-
-Aby měl proces smysl, musí $\mean{Y^2(t)}>0$ a zároveň $\mean{Y^2(t)}<\infty$. Proto musí $\frac{1}{\alpha}\to 0$ a $\varepsilon^2\to 0$ řádově stejně rychle.
 
 \subsection{Poissonův sčítací proces}
 
@@ -255,17 +225,71 @@ Momenty: \[ \mean{Y_n} = \frac{n}{\lambda},  \;\;\;\; \var{Y_n} = \frac{n}{\lamb
 %V simulinku realizovat dirachovy pulsi s intervalem byl exponencialně rozložen, na výstupu integrátoru bude
 
 
+\subsubsection{Autokovarianční (autokorelační) fce Poiss. processu}
+\label{subs:Autokovarianční (autokorelační) fce Poiss. processu}
+
+potřebujeme sdruženou hustotu ppsti pro dva časové okamžiky ($t_1$ a $t_2$), nečhť $t_2 > t_1$
+
+\[ P(X(t_1) = n_1, X(t_2) = n_2) = P(X(t_2)=n_2 | X(t_1)=n_1 ) P(X(t_2)=n_1 ) \]
+
+
+díky bezpamětovostí exponenciálního rozdělení
+
+\[ P(X ) n+ x | X > n) P(X>x) \]
+
+má podmíněná pravděpodobnost $P(X(t_2)=n_2| X(t_1)=n_1)$ Erlangovo rozdělení s parametry $\lambda (t_2 -t_1)$ a $r = n_2 - n_1$
+
+Pokud by do okamžiku by do $t_1$ nastalo $n_1$ událostí, pak rozložení závisí na zbylém počtu $n_2-n_1$ v průběhu časového okamžiku $<t_1,t_2>$
+
+
+
+\begin{align}
+	P(X(t_1) = n_1, P(X(t_2)=n_2) &= \dfrac{\lambda (t_2-t_1)}{(n_2-n_1)} \cdot e^{-\lambda (t_2-t_1)} \cdot e^{-\lambda t_1} \\ &= \dfrac{1}{n_2} [\lambda(t_2-t_1)]^{n_2-n_1} (\lambda t_1)^{n_1}  {n_2 \choose n_1} e^{-\lambda t_2}
+\end{align}
+
+
+\section{Wienerův proces}
+Wienerův proces je model fyzikálního jevu známého jako Braunův pohyb, kde se částice chaoticky pohybuje v kapalině díky náhodným srážkám s molekulami kapaliny. Wienerův proces lze odvodit z Bernoulliho řady, která nabývá hodnot $\brs{-\varepsilon,\varepsilon}$ pro malé $\varepsilon>0$. Předpokládejme, že se kolize odehrávají s rychlostí $\alpha$, tzn. odehrávají se v násobcích $\frac{1}{\alpha}$. Celkový počet kolizí za čas $t$ je $n=\lfloor\alpha\cdot t\rfloor$ (zaokrouhlování dolů na celá čísla).
+
+\subsubsection*{Definujeme náhodný proces}
+\[ X(t)=\sum_{m=1}^{\lfloor\alpha\cdot t\rfloor} W(m), \]
+
+který je podobný Bernoulliho náhodné procházce, ale
+
+\begin{enumerate}[label=\roman*)]
+\item intervaly mezi událostmi jsou $\frac{1}{\alpha}$ namísto 1.
+\item amplitudy jsou $\brs{-\varepsilon,\varepsilon}$ namísto $\brs{-1,1}$
+\item horní mez je $\lfloor\alpha\cdot t\rfloor$ namísto $k$
+\end{enumerate}
+
+Wienerův proces se získá limitním přechodem $\varphi\to 0$ (spojitý náhodný proces) a $\frac{1}{\alpha}\to 0$ (proces spojitý v čase).
+
+\[ Y(t) = \lim_{\substack{\varepsilon\to 0\\ \frac{1}{\alpha}\to 0}} X(t) \]
+
+Jak budou vypadat momenty po limitním přechodu:
+
+\[ \mean{Y(t)} = \lim_{\substack{\varepsilon\to 0\\ \frac{1}{\alpha}\to 0}} \mean{X(t)}=0 \]
+
+Z toho plyne, že Wienerův proces má trvale nulovou střední hodnotu. V případě variace
+
+\[ \mean{Y^2(t)} = \lim_{\substack{\varepsilon\to 0\\ \frac{1}{\alpha}\to 0}} \mean{X^2(t)}=\lim_{\substack{\varepsilon\to 0\\ \frac{1}{\alpha}\to 0}} \lfloor\alpha t\rfloor \varepsilon^2 \]
+
+pro $\frac{1}{\alpha}\to 0, \lfloor\alpha t\rfloor=\alpha t$. Vztah upravíme vytknutím $t$ a tedy
+
+\[ \mean{Y^2(t)} = t \lim_{\substack{\varepsilon\to 0\\ \frac{1}{\alpha}\to 0}} \frac{\varepsilon^2}{\frac{1}{\alpha}} \]
+
+Aby měl proces smysl, musí $\mean{Y^2(t)}>0$ a zároveň $\mean{Y^2(t)}<\infty$. Proto musí $\frac{1}{\alpha}\to 0$ a $\varepsilon^2\to 0$ řádově stejně rychle.
 
 \subsection{Definice Wienerova procesu}
-Wienerův proces je náhodný proces spojitý v čase popsaný gaussovskou hustotou pravděpodobnosti, nebo:
+Wienerův proces je náhodný proces spojitý v čase popsaný gaussovskou hustotou pravděpodobnosti (normální rozdělení), nebo:
 
 \[ P_{x(t)}(x)=\frac{1}{\sqrt{2\pi\alpha\varepsilon^2 t}}e^{-\frac{x^2}{2\alpha\varepsilon^2 t}}, \]
 
-která má nulovou střední hodnotu a varianci $\sigma^2_\lambda(t) = \alpha\varepsilon^2 t$. Počáteční podmínka Wienerova procesu je $P(X(t)=0)=1$. Je to proces spojitý v čase a v úrovni. Odpovídá výstupu integrátoru. Korelační a autokovarianční funkce jsou stejné z důvodu 0 středních hodnot, tedy
+která má nulovou střední hodnotu a varianci $\sigma^2_\lambda(t) = \alpha\varepsilon^2 t$. Počáteční podmínka Wienerova procesu je $P(X(t)=0)=1$ \uv{začínáme z nuly}. Je to proces spojitý v čase a v úrovni. Odpovídá výstupu integrátoru. Korelační a autokovarianční funkce jsou stejné z důvodu 0 středních hodnot, tedy
 
 \begin{eqnarray*}
 R_{xx}(t_1,t_2) &=&\mean{X(t_1)X(t_2)} = \mean{X(t_1)\cdot[X(t_1)+X(t_2)-X(t_1)]} = \\
-& = & \mean{X^2(t_1)} + \mean{X)t_1)\cdot(\underbrace{X(t_2)-X(t_1)}_{\text{nezávislý přírůstek}})}= \\
+& = & \mean{X^2(t_1)} + \mean{X(t_1)\cdot(\underbrace{X(t_2)-X(t_1)}_{\text{nezávislý přírůstek}})}= \\
 & = & \mean{X^2(t)}+\underbrace{\mean{X(t_1)}}_0\cdot \underbrace{\mean{X(t_2)-X(t_1)}}_0 = \alpha\varepsilon t_1
 \end{eqnarray*}
 
