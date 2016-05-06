@@ -7,7 +7,7 @@ Tato rovnice vyjadřuje přenos v Z-transformaci. Definujeme spektrální hustot
 
 \[ z=e^{j\omega T_s},\quad \omega\in(-\omega_n,\omega_n), \]
 
-kde $\omega_n$ je tzv. Nyquistova frekvence $\omega_n = \frac{\pi}{T_s}$. Označme
+kde $\omega_n$ je tzv. Nyquistova frekvence $\omega_n = \frac{\pi}{T_s}$. a $T_S$ je perioda vzorkování náhodné posloupnosti. Označme
 
 \begin{alignat*}{2}
 S_{uu}(\omega) & = S_{uu}(z)|_{z=e^{j\omega T_s}}, S_{uu}(z) && = \sum_{i=-\infty}^\infty C_{uu}(i)z^{-i}\\
@@ -32,7 +32,7 @@ neboli
 
 Pro opačné pořadí vstupu a výstupu platí
 
-\[ S^{uy}(z) = S_{uu}(z)\cdot G^*(z), \]
+\[ S_{uy}(z) = S_{uu}(z)\cdot G^*(z), \]
 
 kde $G^*(z)=G(z)|_{z=z^{-1}}$, tedy
 
@@ -40,7 +40,7 @@ kde $G^*(z)=G(z)|_{z=z^{-1}}$, tedy
 
 Pro spektrální hustotu výstupu platí
 
-\[ S_{yy}(z) = \sum_{i=-\infty}^\infty z^{-i}C_{yy}(i) = \cdots = \sum_{j=0}^\infty z^{-j}g_j \sum_{i=-\infty}^\infty z^{-i} C_{uu}(i)\sum_{k=0}^\infty z^{-k}g_k \]
+\[ S_{yy}(z) = \sum_{i=-\infty}^\infty z^{-i}C_{yy}(i) = \cdots = \sum_{j=\infty}^\infty z^{-j}g_j \sum_{i=-\infty}^\infty z^{-i} C_{uu}(i)\sum_{l=-\infty}^\infty z^{l}g_l \]
 
 tedy
 
@@ -50,7 +50,7 @@ S_{yy}(\omega) & = & \left(G\left(e^{-j\omega T_s}\right)^2\right)\cdot S_{uu}(\
 \end{eqnarray*}
 
 \subsection{Fyzikální interpretace}
-Protože 
+Protože
 
 \[ \frac{1}{2\omega_n}\int\limits_{-\omega_n}^{\omega_n}S_{uu}(\omega)\d\omega = C_{uu}(0)=\delta_u^2=\mean{u_k^2} \]
 
@@ -70,7 +70,7 @@ kde $\delta$ je Diracův impuls a spektrální hustotou
 
 \[ S_{uu}(z) = \sum_{i=-\infty}^\infty C_{uu}(i)z^{-i} = \sum_{i=-\infty}^\infty \delta(i)z^{-i}=z^0=1 \]
 
-Pro tento vstup získáme 
+Pro tento vstup získáme
 
 \begin{eqnarray*}
 C_{yu}(k) & = & \sum_{i=-\infty}^\infty g_iC_{uu}(i-k) = \sum_{i=-\infty}^\infty g_i\delta(k-i)=g_k\\
@@ -96,7 +96,7 @@ P^y & = & \vec{C}P^x\vec{C}\t + \vec{R}
 \end{eqnarray*}
 
 Označme
-\[ u_k = 
+\[ u_k =
 \begin{bmatrix}
 w_k\\v_k
 \end{bmatrix}
@@ -106,7 +106,7 @@ Potom přenos mezi tímto vstupem a výstupem $y_k$ je
 
 \[ G(z) = [C(zI-A)^{-1}, I] \]
 
-Spektrální hustota vstupu je 
+Spektrální hustota vstupu je
 
 \[ S_{uu}(z) =
 \begin{bmatrix}
@@ -126,7 +126,7 @@ Q & S\\ S\t & R
 
 \[ S_{uy}(z) = S\t_{yu}(z) \]
 
-\[ S_{yy}(z) = [C(zI-A)^{-1}, I]\cdot 
+\[ S_{yy}(z) = [C(zI-A)^{-1}, I]\cdot
 \begin{bmatrix}
 Q & S\\ S\t & R
 \end{bmatrix}\cdot [C(zI-A)^{-1}, I]\t
@@ -242,6 +242,6 @@ lze proces popsat
 
 a optimální prediktor výstupu $y_{k+1}$ je
 
-\[ \widehat{y}_{k+1} = \frac{0.25d}{1+0.5d}y_k \] 
+\[ \widehat{y}_{k+1} = \frac{0.25d}{1+0.5d}y_k \]
 
 \end{note}

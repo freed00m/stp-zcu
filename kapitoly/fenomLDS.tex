@@ -5,46 +5,36 @@ Budeme charakterizovat vlastnosti náhodných signálů po průchodu lineárním
 
 pro výstup platí
 
-\[ y_k = \sum_{e-\infty}^k g_{k-e}u_e=\sum_0^{\infty} g_e u _{k-e} \]
+\[ y_k = \sum_{l \to \infty}^k g_{k-l}u_e=\sum_{l=0}^{\infty} g_l u _{k-l} \]
 
-Pro stabilní systém řada konverguje (ve středně-kvadratickém smyslu) a výstup $y_k$ je náhodná posloupnost s konečými druhým momenty
+Pro stabilní systém řada konverguje (\uv{ve středně-kvadratickém smyslu}) a výstup $y_k$ je zase náhodná posloupnost s konečými druhým momenty
 
-\[ m_k^y = \mean{y_k}=\mean{\sum_{e=0}^\infty g_eu_{k-e} } = \sum_{e=0}^\infty g_em_{k-e}^u \]
+\[ m_k^y = \mean{y_k}=\mean{\sum_{l=0}^\infty g_l u_{k-l} } = \sum_{l=0}^\infty g_lm_{k-l}^u \]
 
 Pro výpočet autokovarianční funkce si definujeme odchylky $\widetilde{u}^k=u_k-m_k^u$ a $\widetilde{y}_k=y_k-m_k^u$, pro které platí
 
 \[
-\widetilde{y}_k = y_k-m_k^y = \sum_{e=0}^\infty g_e u_{k-e}-\sum_{e=0}^\infty g_e-m_{k-e}^u=\sum_{e=0}^\infty\widetilde{u}_{k-e}
+\widetilde{y}_k = y_k-m_k^y = \sum_{l=0}^\infty g_l u_{k-l}-\sum_{l=0}^\infty g_l m_{k-l}^u=\sum_{l=0}^\infty g_l \widetilde{u}_{k-l}
 \]
 
 Rozdíl mezi signálem a jeho střední hodnotou se filtruje stejně, jako střední hodnota. Autokovarianční funkce výstupu pak bude
 
 \begin{eqnarray*}
-C_{yy}(k,e) &=& \mean{\widetilde{y}_k\, \widetilde{y}_e}=\mean{ \sum_{i=0}^\infty g_i \widetilde{u}_{k-i}\cdot \sum_{j=0}^\infty g_j\widetilde{u}_{e-j} } = \\
+C_{yy}(k,l) &=& \mean{\widetilde{y}_k\, \widetilde{y}_l}=\mean{ \sum_{i=0}^\infty g_i \widetilde{u}_{k-i}\cdot \sum_{j=0}^\infty g_j\widetilde{u}_{l-j} } = \\
 & = & \sum_{i=0}^\infty \sum_{j=0}^\infty g_i g_j\mean{\widetilde{u}_{k-i}\, \widetilde{u}_{k-j}} = \\
-& = & \sum_{i=0}^\infty \sum_{j=0}^\infty g_i g_j C_{uu}(k-i,e-j)
+& = & \sum_{i=0}^\infty \sum_{j=0}^\infty g_i g_j C_{uu}(k-i,l-j)
 \end{eqnarray*}
 
-Podobně vzájemná autokovarianční funkce mezi výstupem a vstupem.
+Podobně vzájemná autokovarianční funkce mezi výstupem $y_k$ a vstupem $u_k$.
 
 \begin{eqnarray*}
-C_{yu}(k,e) &=& \mean{\widetilde{y}_k\, \widetilde{u}_e}=\mean{ \sum_{i=0}^\infty g_i \widetilde{u}_{k-i}\cdot \widetilde{u}_e } = \\
-& = & \sum_{i=0}^\infty g_i\mean{\widetilde{u}_{k-i}\, \widetilde{u}_{e}} = \\
-& = & \sum_{i=0}^\infty g_i C_{uu}(k-i,e)
+C_{yu}(k,l) &=& \mean{\widetilde{y}_k\, \widetilde{u}_l}=\mean{ \sum_{i=0}^\infty g_i \widetilde{u}_{k-i}\cdot \widetilde{u}_l } = \\
+& = & \sum_{i=0}^\infty g_i\mean{\widetilde{u}_{k-i}\, \widetilde{u}_{l}} = \\
+& = & \sum_{i=0}^\infty g_i  C_{uu}(k-i,l)
 \end{eqnarray*}
 
-Je-li vstupní proces gaussovský, je i výstupní proces gaussovský. Zjednodušení výsledků, pokud bude vstupní proces stacionární, tedy
+Je-li vstupní proces gaussovský, je i výstupní proces gaussovský (jenom tranformujeme náhodné veličiny, vynásobíme konstantou a sečteme, proto zůstane g. proces gausovský). Zjednodušení výsledků, pokud bude vstupní proces stacionární, tedy
 
-\[ m_k^u = m^u, C_{uu}(k,e)=C_{uu}(k-e) \]
-
-rovnice pro střední hodnotu
-
-\[
-m_k^y = \sum_{i=0}^\infty g_i\mean{u_{k-i}}=\left(\sum_{i=0}^\infty\right)\cdot m^u = K\cdot m^u = m^y,
-\]
-
-kde 
-\[ K=\sum_{i=0}^\infty g_i \]
 
 Autokovarianční funkce výstupu
 
@@ -54,12 +44,41 @@ Vzájemná autokovarianční funkce výstupu a vstupu
 
 \[ C_{yu}(k,e) = \sum_{i=0}^\infty g_i C_{uu}(k-e-j)=C_{yu}(k-e) \]
 
-Střední hodnota výstupu je konstantní, obě autokovarianční funkce jsou funkcí rozdílu časových okamžiků. Výstupní proces je tedy stacionární v širším smyslu a výstup a vstup jsou vzájemně stacionární. Lze psát
+Střední hodnota výstupu je konstantní (nemění se v čase), obě autokovarianční funkce jsou funkcí rozdílu časových okamžiků. Výstupní proces je tedy stacionární v širším smyslu a výstup a vstup jsou vzájemně stacionární.
 
-\[ C_{yu}(k) = \sum_{i=-\infty}^\infty g_i C_{uu}(k-i)= g * C_{uu}, \]
+\[ m_k^u = m^u, C_{uu}(k,l)=C_{uu}(k-l) \]
 
-kde $*$ je \textbf{operátor konvoluce}, vzájemná autokovarianční funkce je konvolucí impulsní funkce a autokovarianční funkce vstupu.
+ Lze psát, rovnice pro střední hodnotu
 
-\[ C_{yy}(k) = \sum_{i=-\infty}^\infty \sum_{j=-\infty}^\infty g_i C_{uu}(k-i-j)g_j=g * C_{yy} * \bar{g}, \]
+kde
+\[ K=\sum_{i=0}^\infty g_i \]
+
+střední hodnota
+
+\[ m_k^y\]
+
+
+\[ C_{yy}(k,l) = \sum_{i=0}^\infty \sum_{j=0}^\infty g_i g_j C_{uu}(k-i-j)= C_{yy}, \]
+
+vzájemná kovarianční funkce
+
+\[ C_{yu}(k,l) = \sum_{i=-0}^\infty g_i C_{uu}(k-i-l)=C_{uu}(k-l), \]
+
+
+střední hodnota výstupu je konstantní, obě autokovarianční fce jsou funkcemi č. okamžiků, tj. výstup je staionární v šírším smyslu a vstup a výstup jsou vzájemně stacionární
+
+
+
+někdy se zapisují pomocí konvolutorního operátoru $*$ je, vzájemná autokovarianční funkce je konvolucí impulsní funkce a autokovarianční funkce vstupu.
+
+\[ C_{yu} (k)  =\sum_{i=-\infty}^\infty g_i C_{uu} (k-i) = g * C_{uu} \]
+
+vzájemná kovarianční funkce výstupu a vstupu je konvolucí impulsní funkce a autokovarianční funkce vstupu.
+
+Obdobně to můžeme udělat pro autokovarianční funkci výstupu
+
+\[ C_{yy} (K) = \sum_{i=-\infty}^\infty \sum_{j=-\infty}^\infty g_i g_j C_{uu} (k+j-i) = \sum_{i=-\infty}^\infty \sum_{j=-\infty}^\infty g_i C_{uu}(k-j-i) g_{-j} = g * C_uu * \bar{g}   \]
 
 kde $\bar{g}_k=g_{-k}$,
+
+\uv{To je jen šikovný zápis :)}
