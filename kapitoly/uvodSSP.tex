@@ -26,7 +26,7 @@ Mějme reálný objekt -- vypínač elektrického obvodu. Atributem je stav vyp�
 S & = & S_1\times S_2 \times \ldots \times S_n
 \end{eqnarray*}
 
-V každém časovém okamžiku nabývá atribut pouze jedné hodnoty. Model průběhu atributů představuje \textbf{trajektorii systému}. Trajektorie je zobrazení z množiny $T$ do množiny $S$, tedy množina trajektorií $\Omega = \brs{s; s:T\to S}$, neboli
+V každém časovém okamžiku nabývá atribut pouze jedné hodnoty. Model průběhu atributů představuje \textbf{trajektorii systému}. Trajektorie je zobrazení z množiny $T$ do množiny $S$, tedy množina trajektorií $\Omega = \brs{s | \, s:T\to S}$, neboli
 
 \[ \vec{s} = [s(t_0), s(t_1), \ldots, s(t_M)]=[s_0,s_1,\ldots, s_M] \]
 
@@ -86,7 +86,7 @@ Tato teorie si všímá zjevných (fenomenologických) atributů. Mějme systém
 
 \[ \Sigma = (T,S,P^1), \]
 
-kde $P^1$ je množina zobrazení $P_k, k=0,1,\ldots, M$, které definují kauzální pravděpodobnosti. Systémová proměnná $s_k$ v čase $k$ je obecně determinována celou historií systému vyjádřenou posloupností
+kde $P_1$ je množina zobrazení $P_k, k=0,1,\ldots, M$, které definují kauzální pravděpodobnosti. Systémová proměnná $s_k$ v čase $k$ je obecně determinována celou historií systému vyjádřenou posloupností
 
 \[ s_{k-1},s_{k-2},\ldots,s_0 \]
 
@@ -101,9 +101,9 @@ Pro kauzální pravděpodobnosti však platí
 
 Rozšíření $S$ na nespočetné množiny je triviální a podmíněné pravděpodobnosti se nahradí podmíněnými hustotami pravděpodobnosti. Pro střední hodnotu platí
 
-\[ \mean{\d W\quad \d W\t} = Q\d t, \]
-
-kde $\d W$ lze interpretovat jako $W(t+\d t) - W(t)$
+% \[ \mean{\d W\quad \d W\t} = Q\d t, \]
+%
+% kde $\d W$ lze interpretovat jako $W(t+\d t) - W(t)$
 \end{enumerate}
 
 \subsection{Příklady stochastických systémů}
@@ -136,8 +136,6 @@ kde $\sigma$ značí Diracův pulz. Pro $Q$, resp. $G$ nulové přejde stochasti
 
 Řešení takové stochastické rovnice je ve tvaru
 
-\[ 
-s(t) = s(t_0) + \int\limits_{t_0}^t F\big(s(\tau\big)\tau)\d\tau + \int\limits_{t_0}^t G\big(s(\tau,\tau\big)\d W(\tau),
-\]
+\[ s(t) = s(t_0) + \int\limits_{t_0}^t F\big(s(\tau\big)\tau)\d\tau + \int\limits_{t_0}^t G\big(s(\tau,\tau\big)\d W(\tau), \]
 
 kde první integrál je Riemannův integrál a druhý Itô-ovův stochastický integrál.
