@@ -188,7 +188,7 @@ c(d) & = & 1 + c_1d + \cdots + c_{n_c}d^{n_c}
 
 nebo v časové oblasti
 
-\[ y_k + a_1y_{k+1}+\cdots+a_{n_a}y_{k-n_a}=e_k+c_1e_{k-1}+\cdots+c_{n_c}e_{k-n_c} \]
+\[ y_k + a_1y_{k-1}+\cdots+a_{n_a}y_{k-n_a}=e_k+c_1e_{k-1}+\cdots+c_{n_c}e_{k-n_c} \]
 
 Tato reprezentace se nazývá ARMA model (Autoregressive–moving-average model). Podle věty o spektrální faktorizaci (možná realizaci?) lze nalézt polynomy $a(d)$ a $c(d)$ tak, aby byly oba stabilní (kromě kořenů $c(d)$ na jednotkové kružnici). Původní transformaci lze tedy invertovat:
 
@@ -203,7 +203,7 @@ Posloupnost $\{\ldots, y_{k-1}, y_k \}$ obsahuje veškeré informace o měřené
 \subsection{Inovační reprezentace}
 Uvažujme
 
-\[ y_{k+1}=\frac{c(d)}{a(d)}e_{k-1} \]
+\[ y_{k+1}=\frac{c(d)}{a(d)}e_{k+1} \]
 
 a provedeme dělení polynomů
 
