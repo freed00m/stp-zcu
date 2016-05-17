@@ -167,9 +167,9 @@ Stochastický signál s danými spektrálními vlastnostmi můžeme získat prů
 
 Předpokládejme, že $S_{yy}(\omega)$ je racionální funkcí $\cos(\omega T_s)$ případně $e^{j\omega T_s}$, pak existuje právě jedna monická (= 1 u nejvyšších mocnin polynomů v čitateli i jmenovateli) racionální funkce $G(z)$, která má všechny póly uvnitř jednotkové kružnice a všechny nuly uvnitř, nebo na jednotkové kružnici. Platí
 
-\[ S_{yy}(\omega) = G^2\left|G\left(e^{j\omega T_s}\right)\right|^2 \]
+\[ S_{yy}(\omega) = \sigma^2\left|G\left(e^{j\omega T_s}\right)\right|^2 \]
 
-Uvažujme náhodný proces vzniklý průchodem bílého šumu s rozptylem $\sigma^2$ dynamickým systémem s přenosem $G(z)$ dle předchozí věty. Jeho spektrální hustota pak bude $S_{yy}(z)$.
+Uvažujme náhodný proces vzniklý průchodem bílého šumu s variancí $\sigma^2$ dynamickým systémem s přenosem $G(z)$ dle předchozí věty. Jeho spektrální hustota pak bude $S_{yy}(\omega)$.
 
 \subsection{Věta o realizaci}
 Pro každou racionální spektrální hustotu $S_{yy}\geq 0$ existuje právě jeden dynamický systém s přenosem $G(z)$, který je monickou racionální funkcí, má všechny póly uvnitř jednotkové kružnice a nuly uvnitř, nebo na jednotkové kružnici takový, že stacionární proces s danou spektrální hustotou můžeme získat jako výstup systému je-li vstupem diskrétní bílý šum.
@@ -179,20 +179,24 @@ Omezíme-li se na stacionární procesy s racionálními spektrálními hustotam
 
 \[ y_k = \frac{c(d)}{a(d)}e_k, \]
 
-kde $e_k$ je bílý šum s rozptylem $\sigma^2$, $d$ je operátor zpoždění $d\cdot y_k=y_{k-1}$ a $c(d),a(d)$ jsou polynomy:
+kde $e_k$ je diskrétní bílý šum s rozptylem $\sigma^2$, $d$ je operátor posuvu/zpoždění $d\cdot y_k=y_{k-1}$ a $c(d),a(d)$ jsou polynomy:
 
 \begin{eqnarray*}
 a(d) & = & 1 + a_1d + \cdots + a_{n_a}d^{n_a}\\
-c(d) & = & 1 + c_1d + \cdots + a_{n_c}d^{n_c}
+c(d) & = & 1 + c_1d + \cdots + c_{n_c}d^{n_c}
 \end{eqnarray*}
 
 nebo v časové oblasti
 
 \[ y_k + a_1y_{k+1}+\cdots+a_{n_a}y_{k-n_a}=e_k+c_1e_{k-1}+\cdots+c_{n_c}e_{k-n_c} \]
 
-Tato reprezentace se nazývá ARMA model (Autoregressive–moving-average model). Podle věty o realizaci lze nalézt polynomy $a(d)$ a $c(d)$ tak, aby byly oba stabilní (kromě kořenů $c(d)$ na jednotkové kružnici). Původní transformaci lze tedy invertovat:
+Tato reprezentace se nazývá ARMA model (Autoregressive–moving-average model). Podle věty o spektrální faktorizaci (možná realizaci?) lze nalézt polynomy $a(d)$ a $c(d)$ tak, aby byly oba stabilní (kromě kořenů $c(d)$ na jednotkové kružnici). Původní transformaci lze tedy invertovat:
 
-\[ e_k=\frac{a(d)}{c(d)}y_k \]
+\begin{align} \label{eq:ek_a_ku_c}
+  e_k=\frac{a(d)}{c(d)}y_k
+\end{align}
+
+
 
 Posloupnost $\{\ldots, y_{k-1}, y_k \}$ obsahuje veškeré informace o měřené posloupnosti $\{ \ldots, e_{k-1},e_k \}$. Ukážeme si důležitou vlastnost této bílé posloupnosti a zavedeme pojem \textbf{inovace}.
 
@@ -209,11 +213,11 @@ tedy
 
 \[ y_{k+1} = \frac{\bar{c}(d)}{a(d)}\cdot e_k+e_{k+1} \]
 
-Dosadíme za $e_k$ a dostaneme
+Dosadíme za $e_k$ z \eqref{eq:ek_a_ku_c} a dostaneme
 
 \[ y_{k+1} = \frac{\bar{c}(d)}{a(d)}\cdot\frac{a(d)}{c(d)}y_k+e_{k+1}=\frac{\bar{c}(d)}{c(d)}y_k+e_{k+1} \]
 
-Z toho plyne, že hodnotu $e_{k+1}$ můžeme interpretovat jako tu část informace o $y_{k+1}$, která není obsažena v minulé historii procesu $\{ \ldots,y_{k-1},y_k \}$, a proto ji nazýváme \textbf{inovace procesu}. Protože $e_k$ je bílá posloupnost, je $\widehat{y}_{k+1}=\frac{\bar{c}(d)}{c(d)}y_k$ nejlepší predikcí výstupu na základě zadané historie procesu $\{ \ldots, y_{k-1},y_k \}$ ve smyslu střední kvadratické chyby $\mean{(\ldots, y_{k+1}-\widehat{y}_{k+1})^2}$ a reprezentaci
+Z toho plyne, že hodnotu $e_{k+1}$ můžeme interpretovat jako tu část informace o $y_{k+1}$, která není obsažena v minulé historii procesu $\{ \ldots,y_{k-1},y_k \}$, a proto ji nazýváme \textbf{inovace procesu}. Protože $e_k$ je bílá posloupnost, je $\widehat{y}_{k+1}=\frac{\bar{c}(d)}{c(d)}y_k$ nejlepší predikcí výstupu na základě zadané historie procesu $\{ \ldots, y_{k-1},y_k \}$ ve smyslu střední kvadratické chyby $\mean{( y_{k+1}-\widehat{y}_{k+1})^2}$ a reprezentaci
 
 \[ y_k = \frac{c(d)}{a(d)}e_k = \sum_{r=0}^\infty g_r e_{k-r} \]
 
@@ -230,7 +234,7 @@ Uvažujme spektrální hustotu
 
 Podle věty o realizaci lze tuto hustotu získat průchodem bílého šumu filtrem.
 
-\[ y_k = \frac{1+0.5d}{1+0.25d}e_k,\quad \left(G(z) = \frac{z+0.5}{z+0.25}\right) \]
+\[ y_k = \frac{1+0.5d}{1+0.25d}e_k,\quad \left(G_1(z) = \frac{z+0.5}{z+0.25} = \frac{1+0.5z^{-1}}{1+0.25z^{-1}} \right) \]
 
 protože
 
@@ -245,3 +249,130 @@ a optimální prediktor výstupu $y_{k+1}$ je
 \[ \widehat{y}_{k+1} = \frac{0.25d}{1+0.5d}y_k \]
 
 \end{note}
+
+
+
+
+\section{Diskretní spojitého linearního stochastického systémeu}
+\label{sec:Diskretní spojitého linearního stochastického systémeu}
+
+Uvažujme spojitý linearní stochastický systém s diskrétním měřením výstupu psaný stavovou rovnicí
+
+\begin{align}
+  d X_c (\tau) &= A_c X_c(\tau) d \tau + B_c u_c (\tau) d \tau + d W_c (\tau) \\
+\end{align}
+
+kde $W_c$ je Wienerův proces s nulovou střední hodnotou a kovariancí $\mean{d W_c(\tau)dW_c(\tau)^T} =  Q_c d \tau$
+
+Formálně jde systém zapsat pomocí derivací
+
+\begin{align}
+  \dot{x}_c = A_c x_t(\tau) +B_c u_c(\tau) + \hat{W_c}(\tau) \\
+\end{align}
+
+Kde $\hat{W}_c(\tau)$ je bíly šum s autokovarianční funkcí
+
+\begin{align}
+  C_{W_{c}W_{c}} = Q_c \cdot \delta(\tau_1 - \tau_2)
+\end{align}
+
+Předpokládáme, že deterministický vstup je generován tvarovačem nultého řádu \uv{zoh},
+
+\begin{align}
+  u_c(\tau) &= U_k \;\;\; pro \;\; k T_s \leq \tau \leq (k+1) T_s
+\end{align}
+
+Výstupní rovnice je diskrétní v čase
+
+\begin{align}
+  y_c(\tau) &= C_c X_c (\tau) + D_c u_c (\tau) + V_c (\tau)
+\end{align}
+
+kde $V_c (\tau)$ je bílý šum s konstantní spektrální hustotou
+
+Výstup je vzorkován s periodou $T_s$, výstup v čase
+\begin{align}
+  y_k &= y_c ((k+ \epsilon)T_s) + \hat{V}_k
+\end{align}
+
+kde $\epsilon T_s$ je posunutí mezi změnou řízeného vstupu soustavy a vzorkováním výstupu.
+
+TODO pikčr čára uk yk mezera uk+1 yk+1 to tau
+od uk do uk+1 je to TS a od uk+1 do yk+1 je to epsilonTS
+
+o $\hat{V}_k$ předpokládáme, že jde o diskréní bílý šum s nuovou střední hodnotou a kovarianční maticí $\hat{R}$
+
+
+Obecné řesení stavové rovnice při přechodu z $t_0$ do $\tau$
+\begin{align}
+  c_c &= e^{A_c (\tau - t_0)  x_c(t_0) + \int_{t_{0}}^{\tau}} e^{A(\tau- \mu)} B_c u_c(\mu) d \mu + \int_{t_{0}}^{\tau} e^{A_c(\tau-\mu)} dW_c(\mu)
+\end{align}
+
+Přes jednu periodu vzorkování
+\begin{align}
+  x_{k+1} &= e^{A_cT_s} x_k +  \int_{0}^{T_{s}} e^{A(T_s- \mu)} B_c u_c(\mu) d \mu + W_k
+\end{align}
+
+Kde \[ W_k = \int_{k T_s}^{(k+1)T_S} e^{A_c(k+1)T_s - \mu} d W_c (\mu) \]
+
+je iskrétní bílý šum.
+
+Pro matice ekvivaletního disrkétního systému dostáváme
+\begin{align}
+  A =e^{A_c T_s} \;\; B = \int_0^{T_s} e^{A_c(T_s-\mu)} B_c d\mu = \left( \int_0^{T_s} e^{A_c\mu} \right) B_c
+\end{align}
+
+Kovarianční matici diskrétního bílého šumu určíme jako
+\begin{align}
+  Q&= \mean{W_k W_k^T} = \mean{\int^{(k+1)T_s}_{kT_s} e^{A_c(k+1)T_s-\mu_1} \left( \int^{(k+1)T_s}_{k T_s} e^{A_c (k+1) T_s - \mu_2} d W_c(\mu_2) \right)  } \\
+  &= \int_0^{T_s} e^{A_c \mu} Q_c \left( e^{A_c \mu} \right)^T d \mu
+\end{align}
+
+
+\begin{itemize}
+  \item $d W_c$ jesou nezávyslé přírustky
+  \item $\mean{d W_c (\tau) d W_2 (\tau)^T } = Q_c d \tau$
+  \item $\mean{W_c (\tau_1) W_c (\tau_2)^T} = Q_c \cdot min( \tau_1 \tau_2)$
+\end{itemize}
+K určení rovnice popisující diskrétní výstup $y_k$ nejprve musíme určit stav v čase měření výstupu.
+\begin{align}
+  x_{\epsilon,k} &= e^{A_c \epsilon T_s} x_c + \int_0^{\epsilon T_s} e^{A_c \mu} d \mu B_c u_k + W_{\epsilon, k}
+\end{align}
+
+kde $W_{\epsilon, k} = \int_{kT_s}^{(k+1)T_s} e^{A_c((k+\epsilon)T_s -\mu)} d W_c(\mu)$
+\begin{align}
+  y_k &= C_c e^{A_c \epsilon T_s} x_k + C_c \int_0^{\epsilon T_s} e^{A_c \mu} d \mu B_c u_k + D_c u_k + C_c W_{\epsilon,k} + \hat{V}_k
+\end{align}
+
+Matice výstupní rovnice budou
+\begin{align}
+  C &= C_c e^{A_c \epsilon T_s} \;\;\; D &= C_c W_{\epsilon,k} + \hat{V}_k
+\end{align}
+
+Jako kovarianční matice $R$ bude
+\begin{align}
+  R &= \mean{(C_c W_{\epsilon,k} + \hat{V}_k)(\cdot)^T } = \int_0^{\epsilon,T_s} C_c e^{A_c \mu} Q_c ( e^{A_c \mu} ) C_c^T d \mu + \hat{R}
+\end{align}
+
+a vzájemná kovarianční matice stavového a výstupního šumu bude
+
+\begin{align}
+  S &= \mean{W_k \cdot W_k^T} = \mean{W_k (C_c W_{\epsilon,k} +V_c((k+\epsilon)T_s)^T) } = \ldots \\
+  &= \int_0^{\epsilon T_s} e^{A_c \mu} Q_c (e^{A_c \mu})^T C_c^T d \mu
+\end{align}
+
+kovarianční matice diskrétního šumu bude
+
+\begin{align}
+  cov(\begin{bmatrix}W_k \\ V_k \end{bmatrix}, \begin{bmatrix}W_c \\ V_c \end{bmatrix} ) = \begin{bmatrix} Q & S \\ S^T & R \end{bmatrix} \delta(k-l)
+\end{align}
+
+Poznámky
+\begin{itemize}
+  \item pro diagonální $Q_c$ nemusí být (typicky není) matice $Q$ diagonální
+  \item i pro nekorelované šumy procesu a měření ve spojitém modelu, nejsou pro $\epsilon > 0$ diskretizované šumy procesu a měření nekorelované
+  \item pokud $\epsilon =0$ tak matice $S$ bude nulová a kovarianční matice diskretizovaného procesu bude stejná $R = \hat{R}$
+  \item naopak v limitním případě, kdy $\epsilon \to 1$ tak kovarianční matice pro šumy \[ cov(\begin{bmatrix}W_k \\ V_k \end{bmatrix}, \begin{bmatrix}W_c \\ V_c \end{bmatrix} ) = \begin{bmatrix} Q & Q C_c^T \\ C_c Q & C_c Q C_c^T + \hat{R} \end{bmatrix} \delta(k-l) \]
+  \item $\epsilon T_s = T_s - T_c$ kde $T_c$ je doba výpočtu regulátoru, zpoždení mezi změřením hodnoty výstupů a vygenerování hodnoty vstupu regulátoru
+  \item $e^{A_c \mu} = I + A_c \mu + \frac{1}{2} A_c^2 \mu^2 + \ldots$ je hrubá diskretizace pomocí taylorova rozvoje, pokud zanedbáme všechny vyžší řády, dostaneme Eulerovu aprox.
+\end{itemize}
